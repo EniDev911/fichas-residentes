@@ -52,11 +52,11 @@
 			<input type="radio" name="tipo_residente" id="turistas"> <label for="turistas">Pasajero/Turista</label>
 		</div>
 		</div>
-	<fieldset>
-		<h3>DATOS DE PROPIETARIO, <span style="color: red;">NO CONYUGE, NO CORREDORA</span></h3>
+	<fieldset class="bg-info">
+		<h3>DATOS DEL PROPIETARIO <span style="color: red; white-space: pre">(NO CONYUGE, NO CORREDORA)</span></h3>
 		<div class="flex">
 			<label for="nombre_prop">Nombre: </label>
-			<input type="text" name="nombre_prop" class="input">
+			<input type="text" name="nombre_prop" class="input" required>
 		</div>
 		<div class="flex">
 			<div class="flex">
@@ -190,6 +190,7 @@
 		</div>
 	</fieldset>
 	<button id="btn_agregar">Añadir persona</button>
+	<button type="submit">Descargar</button>
 </form>
 
 <script src="./App.js" type="module"></script>
