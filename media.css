@@ -1,0 +1,12 @@
+@media (min-width: 720px) {
+	h3 {
+		font-size: 1.8rem;
+	}
+	.flex {
+		flex-direction: row;
+		align-items: center;
+	}
+	form {
+		width: 80%;
+	}
+}

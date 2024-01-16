@@ -2,89 +2,68 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Fichas residentes</title>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <link href="bootstrap-datetimepicker.min.css" type="text/css" media="all" rel="stylesheet" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+    <script src="libs/bootstrap-datetimepicker.min.js"></script>
 
-    	<style>
-
-		.flex {
-			display: flex;
-			width: 100%;
-			flex-wrap: nowrap;
-			justify-content: flex-start;
-			flex-direction: column;
-		}
-		fieldset {
-			padding: 10px;
-			overflow: hidden;
-			border: 1px solid #ccc;
-		}
-		.input {
-			flex-basis: fill;
-			width: 100%;
-			border: 0;
-			border-bottom: 1px solid #000;
-		}
-		form {
-			width: 96%;
-			margin: 40px auto;
-		}
-		label {
-			white-space: nowrap;
-			width: fit-content;
-			padding: 0 10px;
-		}
-		h1 {
-			margin: 20px 0;
-		}
-		select {
-			vertical-align: middle;
-			align-self: flex-start;
-			margin: 0 6px;
-		}
-		input[type="radio"] {
-			margin: 0 5px;
-		}
-		button {
-			padding: 10px;
-			margin: 8px 0;
-		}
-
-		@media (min-width: 720px) {
-			.flex {
-				flex-direction: row;
-				align-items: center;
-			}
-			form {
-				width: 80%;
-			}
-		}
-	</style>
+    <link rel="stylesheet" href="partial.css">
+    <link rel="stylesheet" href="media.css">
 </head>
 <body>
 <h1 align="center">Condominio Espacio Uno III</h1>
-<form action="">
+<h2 align="center">Ficha de Residente</h2>
+<div class="container">
+   <div class="row">
+      <div class='col-sm-6'>
+         <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+               <input type='text' class="form-control" />
+               <span class="input-group-addon">
+               <span class="glyphicon glyphicon-calendar"></span>
+               </span>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript">
+         $(function () {
+             $('#datetimepicker1').datetimepicker({
+            "allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+            "format": "MM/DD/YYYY",
+             });
+         });
+      </script>
+   </div>
+</div>
+<form action="" class="container">
 	<div class="flex">
-		<h3 class=".h3">Número de Departamento</h3>
-		<!-- <select name="dpto" id="depto"> -->
-		<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="depto">
-
-			<option value="A 101">A 101</option>
-		</select>
+				<h3>Número de Departamento:</h3>
+				<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="depto">
+				<option value="A 101">A 101</option>
+				</select>
 	</div>
-	<div class="flex" style="margin-bottom: 10px">
-		<span>Marque solo una opción ➡️</span>
-		Año Corrido <input type="radio" name="tipo_residente">
-		Marzo - Diciembre <input type="radio" name="tipo_residente">
-		Pasajero/Turista <input type="radio" name="tipo_residente">
-	</div>
+		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
+		<div class="flex">
+		<div>
+			<input type="radio" name="tipo_residente"> Año Corrido
+		</div>
+		<div>
+			<input type="radio" name="tipo_residente"> Marzo - Diciembre
+		</div>
+		<div>
+			<input type="radio" name="tipo_residente"> Pasajero/Turista
+		</div>
+		</div>
 	<fieldset>
 		<h3>DATOS DE PROPIETARIO, <span style="color: red;">NO CONYUGE, NO CORREDORA</span></h3>
 		<div class="flex">

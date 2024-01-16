@@ -1,0 +1,56 @@
+/*HEADINGS*/
+h1 {
+	font-size: 2.5rem;
+}
+h2 {
+	font-size: 2.2rem;
+}
+.selectpicker {
+	margin: 0;
+}
+
+input[type="radio"] {
+	margin: 0 5px;
+}
+.flex {
+	display: flex;
+	width: 100%;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-center;
+	gap: 10px;
+}
+fieldset {
+	padding: 10px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+}
+.input {
+	flex-basis: fill;
+	width: 100%;
+	border: 0;
+	border-bottom: 1px solid #000;
+}
+form {
+	width: 96%;
+	margin: 40px auto;
+}
+label {
+	white-space: nowrap;
+	width: fit-content;
+	padding: 0 10px;
+}
+h1 {
+	margin: 20px 0;
+}
+select {
+	vertical-align: middle;
+	align-self: flex-start;
+	margin: 0 6px;
+}
+
+button {
+	padding: 10px;
+	margin: 8px 0;
+}
+
