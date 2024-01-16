@@ -1,8 +1,7 @@
+import { cargarDepartamentos } from "./app/pre-carga.js";
+
 let aux = 1;
 
-function eliminarPersona() {
-
-}
 
 function actualizarGUI(node) {
 	const resumen = document.querySelector("#resumen");
@@ -45,3 +44,13 @@ function nuevaPersona() {
 		tel
 	}
 }
+
+function initApplication() {
+    cargarDepartamentos();
+}
+
+document.onreadystatechange = () => {
+    if (document.readyState === "complete") {
+        initApplication();
+    }
+};
