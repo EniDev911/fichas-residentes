@@ -1,4 +1,5 @@
 import { cargarDepartamentos } from "./app/pre-carga.js";
+import "./app/handlers.js";
 
 let aux = 1;
 
@@ -35,14 +36,11 @@ function agregarNodo(nombre, rut, tel) {
 }
 
 function nuevaPersona() {
+	const form = document.querySelector("form");
+	form.preventDefault();
 	const nombre = prompt('Nombre: ');
 	const rut = prompt('Rut: ');
 	const tel = prompt('Télefono: ');
-	return {
-		nombre,
-		rut,
-		tel
-	}
 }
 
 function initApplication() {
