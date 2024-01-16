@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fichas residentes</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		.flex {
+			display: flex;
+			width: 100%;
+			flex-wrap: nowrap;
+			justify-content: flex-start;
+			flex-direction: column;
+		}
+		fieldset {
+			padding: 10px;
+			overflow: hidden;
+		}
+		.input {
+			flex-basis: fill;
+			width: 100%;
+			border: 0;
+			border-bottom: 1px solid #000;
+		}
+		form {
+			width: 96%;
+			margin: 40px auto;
+		}
+		label {
+			white-space: nowrap;
+			width: fit-content;
+			padding: 0 10px;
+		}
+		h1 {
+			margin: 20px 0;
+		}
+		h3 {
+			text-transform: uppercase;
+			font-size: 1rem;
+			margin-bottom: 10px;
+		}
+		select {
+			vertical-align: middle;
+			align-self: flex-start;
+			margin: 0 6px;
+		}
+		input[type="radio"] {
+			margin: 0 5px;
+		}
+		button {
+			padding: 10px;
+			margin: 8px 0;
+		}
+
+		@media (min-width: 720px) {
+			.flex {
+				flex-direction: row;
+				align-items: center;
+			}
+			form {
+				width: 80%;
+			}
+		}
+	</style>
+</head>
+<body>
+<h1 align="center">Condominio Espacio Uno III</h1>
+<form action="">
+	<div class="flex">
+		<h3>Número de Departamento</h3>
+		<select name="dpto" id="">
+			<option value="A 101">A 101</option>
+		</select>
+	</div>
+	<div class="flex" style="margin-bottom: 10px">
+		<span>Marque solo una opción ➡️</span>
+		Año Corrido <input type="radio" name="tipo_residente">
+		Marzo - Diciembre <input type="radio" name="tipo_residente">
+		Pasajero/Turista <input type="radio" name="tipo_residente">
+	</div>
+	<fieldset>
+		<h3>DATOS DE PROPIETARIO, <span style="color: red;">NO CONYUGE, NO CORREDORA</span></h3>
+		<div class="flex">
+			<label for="nombre_prop">Nombre: </label>
+			<input type="text" name="nombre_prop" class="input">
+		</div>
+		<div class="flex">
+			<div class="flex">
+				<label for="rut_prop">Rut: </label>
+				<input type="text" name="rut_prop" class="input">
+			</div>
+			<div class="flex">
+				<label for="tel_prop">Teléfono</label>
+				<input type="text" name="tel_prop" class="input">
+			</div>
+			<div class="flex">
+				<label for="mail_prop">Correo: </label>
+				<input type="text" name="mail_prop" class="input">
+			</div>
+		</div>
+		<div class="flex">
+			<label for="ciudad_prop">Ciudad: </label>
+			<input type="text" name="ciudad_prop" class="input">
+		</div>
+	</fieldset>
+	<fieldset>
+		<h3>Datos corredora o encargado (SI APLICA)</h3>
+		<div class="flex">
+			<label for="nombre_corredora">Nombre</label>
+			<input type="text" name="nombre_corredora" class="input">
+		</div>
+		<div class="flex">
+			<div class="flex">
+				<label for="rut_corredora">Rut: </label>
+				<input type="text" name="rut_corredora" class="input">
+			</div>
+			<div class="flex">
+				<label for="tel_corredora">Teléfono</label>
+				<input type="text" name="tel_corredora" class="input">
+			</div>
+			<div class="flex">
+				<label for="mail_corredora">Correo: </label>
+				<input type="text" name="mail_corredora" class="input">
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<h3>Datos Padre encargado de departamento <span style="color: red">(solo para arrendatarios estudiantes)</span></h3>
+		<div class="flex">
+			<label for="nombre_tutor">Nombre: </label>
+			<input type="text" name="nombre_tutor" class="input">
+		</div>
+		<div class="flex">
+			<div class="flex">
+				<label for="rut_tutor">Rut: </label>
+				<input type="text" name="rut_tutor" class="input">
+			</div>
+			<div class="flex">
+				<label for="tel_tutor">Teléfono</label>
+				<input type="text" name="tel_tutor" class="input">
+			</div>
+			<div class="flex">
+				<label for="mail_tutor">Correo: </label>
+				<input type="text" name="mail_tutor" class="input">
+			</div>
+		</div>
+	</fieldset>
+	<fieldset id="resumen">
+		<h3>Resumen general</h3>
+		<div class="flex">
+			<div class="flex">
+				<label for="total_personas">Total personas:</label>
+				<input type="text" name="total_personas" class="input" disabled>
+			</div>
+			<div class="flex">
+				<label for="adultos">Adultos: </label>
+				<input type="text" name="adultos" class="input">
+			</div>
+			<div class="flex">
+				<label for="ninos">Niños: </label>
+				<input type="text" name="ninos" class="input">
+			</div>
+		</div>
+		<div class="flex">
+			<label for="patente">Vehiculo, solo UNO permitido, modelo y patente: </label>
+			<input type="text" name="patente" class="input">
+		</div>
+		<div class="flex" style="background: #ff4;">
+			<div class="flex">
+				<label for="ingreso">Fecha de ingreso: </label>
+				<input type="date" name="ingreso" class="input">
+			</div>
+			<div class="flex">
+				<label for="salida">Fecha de salida: </label>
+				<input type="date" name="salida" class="input">
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<h3 align="center">Residente 1</h3>
+		<div class="flex">
+			<label for="nombre_r1">Nombre: </label>
+			<input type="text" class="input" name="nombre_r1">
+		</div>
+		<div class="flex">
+			<div class="flex">
+				<label for="rut_r1">Rut: </label>
+				<input type="text" class="input" name="rut_r1">
+			</div>
+			<div class="flex">
+				<label for="tel_r1">Teléfono: </label>
+				<input type="text" class="input" name="tel_r1">
+			</div>
+		</div>
+		<div class="flex">
+			<label for="trabajo_r1">Lugar de trabajo y/o Estudio</label>
+			<input type="text" class="input" name="trabajo_r1">
+		</div>
+	</fieldset>
+	<button onclick="{nuevaPersona()}">Añadir persona</button>
+</form>
+
+<script src="index.js"></script>
+</body>
+</html>
