@@ -28,12 +28,14 @@
              });
          });
       </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js"></script>
 </head>
 <body>
+	<div id="main">
 <h1 align="center">Condominio Espacio Uno III</h1>
 <h2 align="center">Ficha de Residente</h2>
-
-<form action="" class="container">
+<div class="container">
 	<div class="flex">
 				<h3>Número de Departamento:</h3>
 				<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="depto">
@@ -56,7 +58,7 @@
 		<h3>DATOS DEL PROPIETARIO <span style="color: red; white-space: pre">(NO CONYUGE, NO CORREDORA)</span></h3>
 		<div class="flex">
 			<label for="nombre_prop">Nombre: </label>
-			<input type="text" name="nombre_prop" class="input" required>
+			<input type="text" name="nombre_prop" class="input">
 		</div>
 		<div class="flex">
 			<div class="flex">
@@ -190,9 +192,9 @@
 		</div>
 	</fieldset>
 	<button id="btn_agregar">Añadir persona</button>
-	<button type="submit">Descargar</button>
-</form>
-
+	<button id="pdfout">Descargar</button>
+</div>
+</div>
 <script src="./App.js" type="module"></script>
 </body>
 </html>
