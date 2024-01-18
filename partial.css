@@ -38,6 +38,9 @@ input[type="text"] {
 .form-group, .input-group {
 	width: 100%;
 }
+.col-sm-6 {
+	padding: 0;
+}
 form {
 	width: 96%;
 	margin: 40px auto;
