@@ -32,7 +32,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js"></script>
 </head>
 <body>
-	<div id="main">
+	<div id="main" class="container">
+	<img src="logo.png" height="80" align="right" id="logo">
 	<h1 align="center">Condominio Espacio Uno III</h1>
 	<h2 align="center">Ficha de Residente</h2>
 	<form class="container">
@@ -56,47 +57,43 @@
 		</div>
 	<fieldset class="bg-info">
 		<h3>DATOS DEL PROPIETARIO <span style="color: red; white-space: pre">(NO CONYUGE, NO CORREDORA)</span></h3>
-		<div class="flex">
+		<div class="form-group">
 			<label for="nombre_prop">Nombre: </label>
-			<input type="text" name="nombre_prop" class="input" id="nombre_prop" required>
+			<input type="text" name="nombre_prop" class="form-control" id="nombre_prop" required>
 		</div>
 		<div class="flex">
-			<div class="flex">
+			<div class="form-group">
 				<label for="rut_prop">Rut: </label>
-				<input type="text" name="rut_prop" class="input" id="rut_prop" required>
+				<input type="text" name="rut_prop" class="form-control" id="rut_prop" required>
 			</div>
-			<div class="flex">
+			<div class="form-group">
 				<label for="tel_prop">Teléfono</label>
-				<input type="text" name="tel_prop" class="input" id="tel_prop">
+				<input type="text" name="tel_prop" class="form-control" id="tel_prop">
 			</div>
-			<div class="flex">
+			<div class="form-group">
 				<label for="mail_prop">Correo: </label>
-				<input type="mail" name="mail_prop" class="input" id="mail_prop">
+				<input type="mail" name="mail_prop" class="form-control" id="mail_prop">
 			</div>
-		</div>
-		<div class="flex">
-			<label for="ciudad_prop">Ciudad: </label>
-			<input type="text" name="ciudad_prop" class="input">
 		</div>
 	</fieldset>
 	<fieldset>
 		<h3>Datos corredora o encargado (SI APLICA)</h3>
-		<div class="flex">
+		<div class="form-group">
 			<label for="nombre_corredora">Nombre</label>
-			<input type="text" name="nombre_corredora" class="input">
+			<input type="text" name="nombre_corredora" class="form-control" id="nombre_corredora">
 		</div>
 		<div class="flex">
-			<div class="flex">
+			<div class="form-group">
 				<label for="rut_corredora">Rut: </label>
-				<input type="text" name="rut_corredora" class="input">
+				<input type="text" name="rut_corredora" class="form-control" id="rut_corredora">
 			</div>
-			<div class="flex">
+			<div class="form-group">
 				<label for="tel_corredora">Teléfono</label>
-				<input type="text" name="tel_corredora" class="input">
+				<input type="text" name="tel_corredora" class="form-control" id="tel_corredora">
 			</div>
-			<div class="flex">
+			<div class="form-group">
 				<label for="mail_corredora">Correo: </label>
-				<input type="text" name="mail_corredora" class="input">
+				<input type="text" name="mail_corredora" class="form-control">
 			</div>
 		</div>
 	</fieldset>
@@ -170,29 +167,30 @@
       </div>
 		</div>
 	</fieldset>
-	<fieldset>
-		<h3 align="center">Residente 1</h3>
-		<div class="flex">
+	<fieldset id="residente_1">
+		<h3 align="center">RESIDENTE 1</h3>
+		<div class="form-group">
 			<label for="nombre_r1">Nombre: </label>
-			<input type="text" class="input" name="nombre_r1">
+			<input type="text" class="form-control" name="nombre_r1">
 		</div>
 		<div class="flex">
-			<div class="flex">
+			<div class="form-group">
 				<label for="rut_r1">Rut: </label>
-				<input type="text" class="input" name="rut_r1">
+				<input type="text" class="form-control" name="rut_r1">
 			</div>
-			<div class="flex">
+			<div class="form-group">
 				<label for="tel_r1">Teléfono: </label>
-				<input type="text" class="input" name="tel_r1">
+				<input type="text" class="form-control" name="tel_r1">
 			</div>
 		</div>
-		<div class="flex">
+		<div class="form-group">
 			<label for="trabajo_r1">Lugar de trabajo y/o Estudio</label>
-			<input type="text" class="input" name="trabajo_r1">
+			<input type="text" class="form-control" name="trabajo_r1">
 		</div>
 	</fieldset>
-	<button id="btn_agregar" class="btn btn-primary">Añadir persona</button>
+	<button id="btn_agregar" class="btn btn-primary" type="button">Añadir otro residente</button>
 	<button id="pdfout" type="submit" class="btn btn-success">Descargar</button>
+	<button id="resetar" class="btn btn-warning" type="button" onclick="{window.location.reload()}" style="float: right;">Resetear</button>
 </form>
 </div>
 <script src="./App.js" type="module"></script>
