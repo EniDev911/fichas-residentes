@@ -33,9 +33,9 @@
 </head>
 <body>
 	<div id="main">
-<h1 align="center">Condominio Espacio Uno III</h1>
-<h2 align="center">Ficha de Residente</h2>
-<div class="container">
+	<h1 align="center">Condominio Espacio Uno III</h1>
+	<h2 align="center">Ficha de Residente</h2>
+	<form class="container">
 	<div class="flex">
 				<h3>Número de Departamento:</h3>
 				<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="dpto">
@@ -45,33 +45,33 @@
 		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
 		<div class="flex">
 		<div>
-			<input type="radio" name="tipo_residente" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
+			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
 		</div>
 		<div>
-			<input type="radio" name="tipo_residente" id="mar_dic"> <label for="mar_dic">Marzo - Diciembre</label>
+			<input type="radio" name="tipo_residente" value="marzo - diciembre" id="mar_dic"> <label for="mar_dic">Marzo - Diciembre</label>
 		</div>
 		<div>
-			<input type="radio" name="tipo_residente" id="turistas"> <label for="turistas">Pasajero/Turista</label>
+			<input type="radio" name="tipo_residente" value="turistas" id="turistas"> <label for="turistas">Pasajero/Turista</label>
 		</div>
 		</div>
 	<fieldset class="bg-info">
 		<h3>DATOS DEL PROPIETARIO <span style="color: red; white-space: pre">(NO CONYUGE, NO CORREDORA)</span></h3>
 		<div class="flex">
 			<label for="nombre_prop">Nombre: </label>
-			<input type="text" name="nombre_prop" class="input">
+			<input type="text" name="nombre_prop" class="input" id="nombre_prop" required>
 		</div>
 		<div class="flex">
 			<div class="flex">
 				<label for="rut_prop">Rut: </label>
-				<input type="text" name="rut_prop" class="input">
+				<input type="text" name="rut_prop" class="input" id="rut_prop" required>
 			</div>
 			<div class="flex">
 				<label for="tel_prop">Teléfono</label>
-				<input type="text" name="tel_prop" class="input">
+				<input type="text" name="tel_prop" class="input" id="tel_prop">
 			</div>
 			<div class="flex">
 				<label for="mail_prop">Correo: </label>
-				<input type="text" name="mail_prop" class="input">
+				<input type="mail" name="mail_prop" class="input" id="mail_prop">
 			</div>
 		</div>
 		<div class="flex">
@@ -192,8 +192,8 @@
 		</div>
 	</fieldset>
 	<button id="btn_agregar">Añadir persona</button>
-	<button id="pdfout">Descargar</button>
-</div>
+	<button id="pdfout" type="submit">Descargar</button>
+</form>
 </div>
 <script src="./App.js" type="module"></script>
 </body>
