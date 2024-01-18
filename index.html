@@ -45,7 +45,7 @@
 		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
 		<div class="flex">
 		<div>
-			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
+			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido" checked> <label for="anio_corrido">Año Corrido</label>
 		</div>
 		<div>
 			<input type="radio" name="tipo_residente" value="marzo - diciembre" id="mar_dic"> <label for="mar_dic">Marzo - Diciembre</label>
@@ -191,8 +191,8 @@
 			<input type="text" class="input" name="trabajo_r1">
 		</div>
 	</fieldset>
-	<button id="btn_agregar">Añadir persona</button>
-	<button id="pdfout" type="submit">Descargar</button>
+	<button id="btn_agregar" class="btn btn-primary">Añadir persona</button>
+	<button id="pdfout" type="submit" class="btn btn-success">Descargar</button>
 </form>
 </div>
 <script src="./App.js" type="module"></script>

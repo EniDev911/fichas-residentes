@@ -39,9 +39,15 @@ form.addEventListener("submit", (event) => {
 })
 
 btnAgregar.onclick = () => {
-	const nombre = prompt('Nombre: ');
-	const rut = prompt('Rut: ');
-	const tel = prompt('Télefono: ');
+	 const nombre = prompt('Nombre: ');
+   const rut = prompt('Rut: ');
+    if(nombre===undefined || rut===undefined)
+    {
+    }else if(reply===""){
+      alert("Ha pulsado aceptar con el campo vacio");
+    } else {
+	     const tel = prompt('Télefono: ');
+    }
 }
 
 
