@@ -1,5 +1,5 @@
 export function cargarDepartamentos() {
-    const select_deptops = document.getElementById("depto");
+    const select_deptops = document.getElementById("dpto");
     for (let index = 0; index <= 2; index++) {
         const BLOCK = ["A", "B", "C"];
         for (let j = 1; j <= 5; j++) {
