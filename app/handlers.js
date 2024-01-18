@@ -24,19 +24,19 @@ btnPDFout.addEventListener('click', ()=> {
 // doc.text("Octonyan loves jsPDF", 35, 25);
 // doc.addImage("examples/images/Octonyan.jpg", "JPEG", 15, 40, 180, 180);
 	// checking
-	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-  	// mobile
-  	doc.html(canvas, {
-		x: margin,
-    	y: margin,
-    	html2canvas: {
-      		scale: scaleMobile,
-    	},
-    	callback: function(doc) {
-      		doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
-    	}
-  	})
-	} else {
+	// if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+ //  	// mobile
+ //  	doc.html(canvas, {
+	// 	x: margin,
+ //    	y: margin,
+ //    	html2canvas: {
+ //      		scale: scaleMobile,
+ //    	},
+ //    	callback: function(doc) {
+ //      		doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
+ //    	}
+ //  	})
+	// } else {
   // PC
   // doc.html(canvas, {
   //   x: margin,
@@ -58,5 +58,5 @@ btnPDFout.addEventListener('click', ()=> {
     doc.setFontSize(10);
     doc.text("Ficha de Residente", xOffset,45,'center');
   	doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
-	}
+	// }
 })
