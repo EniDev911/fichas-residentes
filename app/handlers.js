@@ -8,7 +8,6 @@ form.addEventListener("submit", (event) => {
   const margin = 20;
   let scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
   let scaleMobile = (doc.internal.pageSize.width - margin * 2) / document.body.getBoundingClientRect();
-
   const dpto = document.getElementById("dpto");
   const tipo_residente = document.querySelector('input[name="tipo_residente"]:checked').value;
   const nombre_prop = document.getElementById("nombre_prop").value;
@@ -17,10 +16,8 @@ form.addEventListener("submit", (event) => {
   const mail_prop = document.getElementById("mail_prop").value;
   const nombre_corredora = document.getElementById("nombre_corredora").value;
   var xOffset = doc.internal.pageSize.width / 2;
-
   doc.setFontSize(20);
   doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
-  doc.addImage(document.getElementById('logo'), 'PNG', 15, 40, 180, 180)
 
   doc.setFontSize(12);
   doc.text("Ficha de Residente", xOffset,45,'center');

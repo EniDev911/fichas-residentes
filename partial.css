@@ -35,7 +35,7 @@ fieldset {
 input[type="text"] {
 	width: 100%;
 }
-.form-group {
+.form-group, .input-group {
 	width: 100%;
 }
 form {
