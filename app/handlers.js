@@ -53,7 +53,10 @@ btnPDFout.addEventListener('click', ()=> {
 
   // Other solution
 	// doc.setFontSize(40);
-  	doc.text("Condominio Espacio Uno III", 135, 25);
+    var xOffset = doc.internal.pageSize.width / 2;
+  	doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
+    doc.setFontSize(10);
+    doc.text("Ficha de Residente", xOffset,45,'center');
   	doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
 	}
 })
