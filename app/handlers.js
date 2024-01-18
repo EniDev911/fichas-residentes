@@ -21,6 +21,7 @@ btnPDFout.addEventListener('click', ()=> {
 	const margin = 20;
 	let scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
 	let scaleMobile = (doc.internal.pageSize.width - margin * 2) / document.body.getBoundingClientRect();
+  const dpto = document.getElementById("dpto");
 // doc.text("Octonyan loves jsPDF", 35, 25);
 // doc.addImage("examples/images/Octonyan.jpg", "JPEG", 15, 40, 180, 180);
 	// checking
@@ -57,6 +58,7 @@ btnPDFout.addEventListener('click', ()=> {
   	doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
     doc.setFontSize(10);
     doc.text("Ficha de Residente", xOffset,45,'center');
+    doc.text("Número de Departamento: "+dpto.value, 20, 65,);
   	doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
 	// }
 })
