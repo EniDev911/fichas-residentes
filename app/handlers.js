@@ -15,30 +15,42 @@ form.addEventListener("submit", (event) => {
   const tel_prop = document.getElementById("tel_prop").value;
   const mail_prop = document.getElementById("mail_prop").value;
   const nombre_corredora = document.getElementById("nombre_corredora").value;
-  var xOffset = doc.internal.pageSize.width / 2;
-  doc.setFontSize(20);
-  doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
+  const rut_corredora = document.getElementById("rut_corredora").value;
+  const residentes = document.querySelectorAll(".residente");
 
-  doc.setFontSize(12);
-  doc.text("Ficha de Residente", xOffset,45,'center');
-  doc.setDrawColor(0, 0, 0);
-  doc.line(35, 60, 570, 60);
-  doc.setFontSize(13);
-  doc.text("Número de Departamento: "+dpto.value, 40, 85);
-  doc.text("Tipo de Residente: "+tipo_residente, 305, 85);
-  doc.text("DATOS DEL PROPIETARIO: ", 40, 115);
-  const textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
-  doc.setDrawColor(255, 0, 0);
-  doc.line(40, 120, 40 + textWidth, 120)
-  doc.text("Nombre: "+nombre_prop, 40, 135);
-  doc.text("Rut: "+rut_prop, 40, 155);
-  doc.text("Télefono: "+tel_prop, 160, 155);
-  doc.text("Correo: "+mail_prop, 315, 155);
-  doc.setDrawColor(0, 0, 0);
-  doc.line(35, 175, 570, 175);
-  doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
 
-  doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
+  // var xOffset = doc.internal.pageSize.width / 2;
+  // doc.setFontSize(20);
+  // doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
+
+  // doc.setFontSize(12);
+  // doc.text("Ficha de Residente", xOffset,45,'center');
+  // doc.setDrawColor(0, 0, 0);
+  // doc.line(35, 60, 570, 60);
+  // doc.setFontSize(13);
+  // doc.text("Número de Departamento: "+dpto.value, 40, 85);
+  // doc.text("Tipo de Residente: "+tipo_residente, 305, 85);
+  // doc.text("DATOS DEL PROPIETARIO: ", 40, 115);
+  // const textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
+  // doc.setDrawColor(255, 0, 0);
+  // doc.line(40, 120, 40 + textWidth, 120)
+  // doc.text("Nombre: "+nombre_prop, 40, 135);
+  // doc.text("Rut: "+rut_prop, 40, 155);
+  // doc.text("Télefono: "+tel_prop, 160, 155);
+  // doc.text("Correo: "+mail_prop, 315, 155);
+  // doc.setDrawColor(0, 0, 0);
+  // doc.line(35, 175, 570, 175);
+  // doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
+  // doc.text("Nombre: "+nombre_corredora, 40, 215);
+  // doc.text("Rut: "+rut_corredora, 40, 235);
+  // doc.text("Télefono: "+tel_prop, 160, 235);
+  // doc.text("Correo: "+mail_prop, 315, 235);
+
+
+  // doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
+  residentes.forEach( function(element, index) {
+    console.log(element.querySelector("#nombre_r1"));
+  });
 
 })
 
@@ -46,7 +58,7 @@ btnAgregar.onclick = () => {
   let html = document.getElementById(`residente_${aux}`)
   aux++;
   let template = `
-    <fieldset id="residente_${aux}">
+    <fieldset id="residente_${aux}" class="residente">
     <h3 align="center">RESIDENTE ${aux}</h3>
     <div class="form-group">
       <label for="nombre_r1">Nombre: </label>
