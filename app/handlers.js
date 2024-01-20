@@ -19,38 +19,40 @@ form.addEventListener("submit", (event) => {
   const residentes = document.querySelectorAll(".residente");
 
 
-  // var xOffset = doc.internal.pageSize.width / 2;
-  // doc.setFontSize(20);
-  // doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
+  var xOffset = doc.internal.pageSize.width / 2;
+  doc.setFontSize(20);
+  doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
 
-  // doc.setFontSize(12);
-  // doc.text("Ficha de Residente", xOffset,45,'center');
-  // doc.setDrawColor(0, 0, 0);
-  // doc.line(35, 60, 570, 60);
-  // doc.setFontSize(13);
-  // doc.text("Número de Departamento: "+dpto.value, 40, 85);
-  // doc.text("Tipo de Residente: "+tipo_residente, 305, 85);
-  // doc.text("DATOS DEL PROPIETARIO: ", 40, 115);
-  // const textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
-  // doc.setDrawColor(255, 0, 0);
-  // doc.line(40, 120, 40 + textWidth, 120)
-  // doc.text("Nombre: "+nombre_prop, 40, 135);
-  // doc.text("Rut: "+rut_prop, 40, 155);
-  // doc.text("Télefono: "+tel_prop, 160, 155);
-  // doc.text("Correo: "+mail_prop, 315, 155);
-  // doc.setDrawColor(0, 0, 0);
-  // doc.line(35, 175, 570, 175);
-  // doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
-  // doc.text("Nombre: "+nombre_corredora, 40, 215);
-  // doc.text("Rut: "+rut_corredora, 40, 235);
-  // doc.text("Télefono: "+tel_prop, 160, 235);
-  // doc.text("Correo: "+mail_prop, 315, 235);
-
-
-  // doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
+  doc.setFontSize(12);
+  doc.text("Ficha de Residente", xOffset,45,'center');
+  doc.setDrawColor(0, 0, 0);
+  doc.line(35, 60, 570, 60);
+  doc.setFontSize(13);
+  doc.text("Departamento: "+dpto.value, 40, 85);
+  doc.text("Tipo de Residente: "+tipo_residente, 305, 85);
+  doc.text("DATOS DEL PROPIETARIO: ", 40, 115);
+  const textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
+  doc.setDrawColor(255, 0, 0);
+  doc.line(40, 120, 40 + textWidth, 120)
+  doc.text("Nombre: "+nombre_prop, 40, 135);
+  doc.text("Rut: "+rut_prop, 40, 155);
+  doc.text("Télefono: "+tel_prop, 160, 155);
+  doc.text("Correo: "+mail_prop, 315, 155);
+  doc.setDrawColor(0, 0, 0);
+  doc.line(35, 175, 570, 175);
+  doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
+  doc.text("Nombre: "+nombre_corredora, 40, 215);
+  doc.text("Rut: "+rut_corredora, 40, 235);
+  doc.text("Télefono: "+tel_prop, 160, 235);
+  doc.text("Correo: "+mail_prop, 315, 235);
   residentes.forEach( function(element, index) {
-    console.log(element.querySelector("#nombre_r1"));
+    // console.log(element.querySelector(`#nombre_r`${index+1}));
+    let nombre = element.querySelector(`#nombre_r${index+1}`).value
+    doc.text("Nombre: "+nombre, 40, 265);
   });
+
+  doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
+
 
 })
 
