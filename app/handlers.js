@@ -2,6 +2,18 @@ const btnAgregar = document.querySelector('#btn_agregar');
 const form = document.querySelector("form");
 let aux = 1;
 
+function formatName(names){
+  const ans = names.toLowerCase();
+  const nameSplit = ans.split(" ");
+
+  const arrNames = nameSplit.map(function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  });
+
+  return arrNames.join(" ")
+}
+
+
 form.addEventListener("submit", (event) => {
 	event.preventDefault();
   const doc = new jsPDF('p', 'pt', 'letter');
@@ -20,24 +32,28 @@ form.addEventListener("submit", (event) => {
 
 
   var xOffset = doc.internal.pageSize.width / 2;
+  let yOffset = 25
   doc.setFontSize(20);
-  doc.text("Condominio Espacio Uno III", xOffset, 25,'center');
-
+  doc.text("Condominio Espacio Uno III", xOffset, yOffset,'center');
   doc.setFontSize(12);
-  doc.text("Ficha de Residente", xOffset,45,'center');
+  doc.text("Ficha de Residente", xOffset,(yOffset += 20),'center');
+  doc.setFontSize(20);
+  doc.text("DPTO. "+dpto.value, xOffset, (yOffset += 23), 'center');
+  doc.setFontSize(12);
+  doc.text("Tipo de Residente: "+tipo_residente, xOffset, (yOffset += 20), 'center');
   doc.setDrawColor(0, 0, 0);
-  doc.line(35, 60, 570, 60);
-  doc.setFontSize(13);
-  doc.text("Departamento: "+dpto.value, 40, 85);
-  doc.text("Tipo de Residente: "+tipo_residente, 305, 85);
-  doc.text("DATOS DEL PROPIETARIO: ", 40, 115);
+  doc.line(35, (yOffset += 10), 570, (yOffset));
+  doc.text("DATOS DEL PROPIETARIO: ", 40, (yOffset += 20));
   let textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
   doc.setDrawColor(255, 0, 0);
-  doc.line(40, 120, 40 + textWidth, 120)
-  doc.text("Nombre: "+nombre_prop, 40, 135);
-  doc.text("Rut: "+rut_prop, 40, 155);
-  doc.text("Télefono: "+tel_prop, 160, 155);
-  doc.text("Correo: "+mail_prop, 315, 155);
+  doc.line(40, (yOffset += 5), 40 + textWidth, yOffset)
+  doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
+  doc.setFont(undefined, 'normal').text(formatName(nombre_prop), (50 + doc.getTextWidth("Nombre:")), yOffset);
+  doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+  doc.setFont(undefined, 'normal').text(rut_prop, (45 + doc.getTextWidth("Rut:")), yOffset);
+  doc.setFont(undefined, 'bold').text("Télefono:", 180, yOffset);
+  doc.setFont(undefined, 'normal').text(tel_prop, (190 + doc.getTextWidth("Télefono:")), yOffset);
+  doc.text("Correo: "+mail_prop, 315, yOffset);
   doc.setDrawColor(0, 0, 0);
   doc.line(35, 175, 570, 175);
   doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
@@ -50,7 +66,6 @@ form.addEventListener("submit", (event) => {
   residentes.forEach( function(element, index) {
   doc.text(`RESIDENTE ${index+1}`, xOffset, y,'center');
     y += 20;
-    new new FileReader()
     // console.log(element.querySelector(`#nombre_r`${index+1}));
     let nombre = element.querySelector(`#nombre_r${index+1}`).value
     doc.text("Nombre: "+nombre, 40, y);
