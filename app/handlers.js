@@ -31,7 +31,7 @@ form.addEventListener("submit", (event) => {
   doc.text("Departamento: "+dpto.value, 40, 85);
   doc.text("Tipo de Residente: "+tipo_residente, 305, 85);
   doc.text("DATOS DEL PROPIETARIO: ", 40, 115);
-  const textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
+  let textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
   doc.setDrawColor(255, 0, 0);
   doc.line(40, 120, 40 + textWidth, 120)
   doc.text("Nombre: "+nombre_prop, 40, 135);
@@ -45,10 +45,15 @@ form.addEventListener("submit", (event) => {
   doc.text("Rut: "+rut_corredora, 40, 235);
   doc.text("Télefono: "+tel_prop, 160, 235);
   doc.text("Correo: "+mail_prop, 315, 235);
+  let y = 295;
+  doc.line(35, y, 570, y);
   residentes.forEach( function(element, index) {
+  doc.text(`RESIDENTE ${index+1}`, xOffset, y,'center');
+    y += 20;
+    new new FileReader()
     // console.log(element.querySelector(`#nombre_r`${index+1}));
     let nombre = element.querySelector(`#nombre_r${index+1}`).value
-    doc.text("Nombre: "+nombre, 40, 265);
+    doc.text("Nombre: "+nombre, 40, y);
   });
 
   doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
@@ -63,21 +68,21 @@ btnAgregar.onclick = () => {
     <fieldset id="residente_${aux}" class="residente">
     <h3 align="center">RESIDENTE ${aux}</h3>
     <div class="form-group">
-      <label for="nombre_r1">Nombre: </label>
-      <input type="text" class="form-control" name="nombre_r1">
+      <label for="nombre_r${aux}">Nombre: </label>
+      <input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}">
     </div>
     <div class="flex">
       <div class="form-group">
-        <label for="rut_r1">Rut: </label>
+        <label for="rut_r${aux}">Rut: </label>
         <input type="text" class="form-control" name="rut_r1">
       </div>
       <div class="form-group">
-        <label for="tel_r1">Teléfono: </label>
+        <label for="tel_r${aux}">Teléfono: </label>
         <input type="text" class="form-control" name="tel_r1">
       </div>
     </div>
     <div class="form-group">
-      <label for="trabajo_r1">Lugar de trabajo y/o Estudio</label>
+      <label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
       <input type="text" class="form-control" name="trabajo_r1">
     </div>
   </fieldset>`
