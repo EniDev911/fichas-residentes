@@ -51,9 +51,12 @@ form.addEventListener("submit", (event) => {
   doc.setFont(undefined, 'normal').text(formatName(nombre_prop), (50 + doc.getTextWidth("Nombre:")), yOffset);
   doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
   doc.setFont(undefined, 'normal').text(rut_prop, (45 + doc.getTextWidth("Rut:")), yOffset);
-  doc.setFont(undefined, 'bold').text("Télefono:", 180, yOffset);
-  doc.setFont(undefined, 'normal').text(tel_prop, (190 + doc.getTextWidth("Télefono:")), yOffset);
-  doc.text("Correo: "+mail_prop, 315, yOffset);
+  // PHONE
+  doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+  doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+  // MAIL
+  doc.setFont(undefined, 'bold').text("Correo:", 350, yOffset);
+  doc.setFont(undefined, 'normal').text(mail_prop, (360 + doc.getTextWidth("Correo")) , yOffset);
   doc.setDrawColor(0, 0, 0);
   doc.line(35, 175, 570, 175);
   doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
