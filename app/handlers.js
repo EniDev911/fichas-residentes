@@ -16,12 +16,14 @@ function formatName(names){
 
 form.addEventListener("submit", (event) => {
 	event.preventDefault();
-  const doc = new jsPDF('p', 'pt', 'letter');
+  const doc = new jsPDF('p', 'pt', 'A4');
   const margin = 20;
   let scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
   let scaleMobile = (doc.internal.pageSize.width - margin * 2) / document.body.getBoundingClientRect();
   const dpto = document.getElementById("dpto");
   const tipo_residente = document.querySelector('input[name="tipo_residente"]:checked').value;
+  const ingreso = document.getElementById("f_ingreso").value;
+  const salida = document.getElementById("f_salida").value;
   const nombre_prop = document.getElementById("nombre_prop").value;
   const rut_prop = document.getElementById("rut_prop").value;
   const tel_prop = document.getElementById("tel_prop").value;
@@ -40,7 +42,11 @@ form.addEventListener("submit", (event) => {
   doc.setFontSize(20);
   doc.text("DPTO. "+dpto.value, xOffset, (yOffset += 23), 'center');
   doc.setFontSize(12);
-  doc.text("Tipo de Residente: "+tipo_residente, xOffset, (yOffset += 20), 'center');
+  doc.setFont(undefined, 'bold').text(tipo_residente.toUpperCase(), 40, (yOffset += 20));
+  doc.text("INGRESO:" , 280, yOffset);
+  doc.setFont(undefined, 'normal').text(ingreso, (285 + doc.getTextWidth("INGRESO:")), yOffset)
+  doc.setFont(undefined, 'bold').text("SALIDA:" , 450, yOffset);
+  doc.setFont(undefined, 'normal').text(salida, (455 + doc.getTextWidth("SALIDA:")), yOffset)
   doc.setDrawColor(0, 0, 0);
   doc.line(35, (yOffset += 10), 570, (yOffset));
   doc.text("DATOS DEL PROPIETARIO: ", 40, (yOffset += 20));
@@ -55,27 +61,48 @@ form.addEventListener("submit", (event) => {
   doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
   doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
   // MAIL
-  doc.setFont(undefined, 'bold').text("Correo:", 350, yOffset);
-  doc.setFont(undefined, 'normal').text(mail_prop, (360 + doc.getTextWidth("Correo")) , yOffset);
+  doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+  doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
   doc.setDrawColor(0, 0, 0);
-  doc.line(35, 175, 570, 175);
-  doc.text("DATOS CORREDORA O ENCARGADO: ", 40, 195);
-  doc.text("Nombre: "+nombre_corredora, 40, 215);
-  doc.text("Rut: "+rut_corredora, 40, 235);
-  doc.text("Télefono: "+tel_prop, 160, 235);
-  doc.text("Correo: "+mail_prop, 315, 235);
-  let y = 295;
-  doc.line(35, y, 570, y);
+  doc.line(35, (yOffset += 10), 570, yOffset);
+  // CORREEDORA
+  doc.text("DATOS CORREDORA O ENCARGADO: ", 40, (yOffset += 20));
+  doc.setDrawColor(255, 0, 0);
+  doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS CORREDORA O ENCARGADO: "), yOffset)
+  doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
+  doc.setFont(undefined, 'normal').text(formatName(nombre_corredora), (50 + doc.getTextWidth("Nombre:")), yOffset);
+  // RUT
+  doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+  doc.setFont(undefined, 'normal').text(rut_corredora, (45 + doc.getTextWidth("Rut:")), yOffset);
+  // PHONE
+  doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+  doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+  // MAIL
+  doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+  doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+  doc.setDrawColor(0, 0, 0);
+  doc.line(35, (yOffset += 10), 570, yOffset);
+  // doc.line(35, y, 570, y);
   residentes.forEach( function(element, index) {
-  doc.text(`RESIDENTE ${index+1}`, xOffset, y,'center');
-    y += 20;
+  yOffset += 20;
+  doc.text(`RESIDENTE ${index+1}`, xOffset, yOffset,'center');
     // console.log(element.querySelector(`#nombre_r`${index+1}));
-    let nombre = element.querySelector(`#nombre_r${index+1}`).value
-    doc.text("Nombre: "+nombre, 40, y);
+    doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
+    doc.setFont(undefined, 'normal').text(formatName(element.querySelector(`#nombre_r${index+1}`).value), (50 + doc.getTextWidth("Nombre:")), yOffset);
+    // RUT
+    doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+    doc.setFont(undefined, 'normal').text(element.querySelector(`#rut_r${index+1}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
+     // PHONE
+    doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+    doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+      // MAIL
+    doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+    doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+    // LINE
+    doc.line(35, (yOffset += 10), 570, yOffset);
   });
 
   doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
-
 
 })
 
@@ -92,7 +119,7 @@ btnAgregar.onclick = () => {
     <div class="flex">
       <div class="form-group">
         <label for="rut_r${aux}">Rut: </label>
-        <input type="text" class="form-control" name="rut_r1">
+        <input type="text" class="form-control" name="rut_r1" id="rut_r${aux}">
       </div>
       <div class="form-group">
         <label for="tel_r${aux}">Teléfono: </label>
