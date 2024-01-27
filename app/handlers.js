@@ -49,6 +49,8 @@ form.addEventListener("submit", (event) => {
   doc.setFont(undefined, 'normal').text(salida, (455 + doc.getTextWidth("SALIDA:")), yOffset)
   doc.setDrawColor(0, 0, 0);
   doc.line(35, (yOffset += 10), 570, (yOffset));
+  doc.line(35, 98, 35, 828);
+  doc.line(570, 98, 570, 828);
   doc.text("DATOS DEL PROPIETARIO: ", 40, (yOffset += 20));
   let textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
   doc.setDrawColor(255, 0, 0);
@@ -83,24 +85,42 @@ form.addEventListener("submit", (event) => {
   doc.setDrawColor(0, 0, 0);
   doc.line(35, (yOffset += 10), 570, yOffset);
   // doc.line(35, y, 570, y);
-  residentes.forEach( function(element, index) {
-  yOffset += 20;
-  doc.text(`RESIDENTE ${index+1}`, xOffset, yOffset,'center');
+  for (var i = 1; i < 7; i++) {
+    yOffset += 20;
+    doc.text(`RESIDENTE ${i}`, xOffset, yOffset,'center');
     // console.log(element.querySelector(`#nombre_r`${index+1}));
     doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
-    doc.setFont(undefined, 'normal').text(formatName(element.querySelector(`#nombre_r${index+1}`).value), (50 + doc.getTextWidth("Nombre:")), yOffset);
+    // doc.setFont(undefined, 'normal').text(formatName(element.querySelector(`#nombre_r${index+1}`).value), (50 + doc.getTextWidth("Nombre:")), yOffset);
     // RUT
     doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
-    doc.setFont(undefined, 'normal').text(element.querySelector(`#rut_r${index+1}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
+    // doc.setFont(undefined, 'normal').text(element.querySelector(`#rut_r${index+1}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
      // PHONE
     doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
-    doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+    // doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
       // MAIL
     doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-    doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+    // doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
     // LINE
     doc.line(35, (yOffset += 10), 570, yOffset);
-  });
+  }
+  // residentes.forEach( function(element, index) {
+  //   yOffset += 20;
+  //   doc.text(`RESIDENTE ${index+1}`, xOffset, yOffset,'center');
+  //   // console.log(element.querySelector(`#nombre_r`${index+1}));
+  //   doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
+  //   doc.setFont(undefined, 'normal').text(formatName(element.querySelector(`#nombre_r${index+1}`).value), (50 + doc.getTextWidth("Nombre:")), yOffset);
+  //   // RUT
+  //   doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+  //   doc.setFont(undefined, 'normal').text(element.querySelector(`#rut_r${index+1}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
+  //    // PHONE
+  //   doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+  //   doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+  //     // MAIL
+  //   doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+  //   doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+  //   // LINE
+  //   doc.line(35, (yOffset += 10), 570, yOffset);
+  // });
 
   doc.output('dataurlnewwindow',{ filename: 'pdf.pdf'})
 

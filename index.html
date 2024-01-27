@@ -24,7 +24,7 @@
             "showClose": true,
             "showClear": true,
             "showTodayButton": true,
-            "format": "MM/DD/YYYY",
+            "format": "DD/MM/YYYY",
              });
          });
       </script>
@@ -45,13 +45,13 @@
 		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
 		<div class="flex">
 		<div>
-			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido" checked> <label for="anio_corrido">Año Corrido</label>
+			<input type="radio" name="tipo_residente" value="turistas" id="turistas" checked> <label for="turistas">Pasajero/Turista</label>
+		</div>
+		<div>
+			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
 		</div>
 		<div>
 			<input type="radio" name="tipo_residente" value="marzo - diciembre" id="mar_dic"> <label for="mar_dic">Marzo - Diciembre</label>
-		</div>
-		<div>
-			<input type="radio" name="tipo_residente" value="turistas" id="turistas"> <label for="turistas">Pasajero/Turista</label>
 		</div>
 		</div>
 	<fieldset class="bg-info">
@@ -175,6 +175,38 @@
 	<button id="resetar" class="btn btn-warning" type="button" onclick="{window.location.reload()}" style="float: right;">Resetear</button>
 </form>
 </div>
+<script>
+	function addOneYear(date) {
+  		date.setFullYear(date.getFullYear() + 1);
+  		return date;
+	}
+
+
+	function getDate(date) {
+		// var today = new Date();
+		var dd = date.getDate();
+		var mm = date.getMonth()+1; //Enero es 0!
+		var yyyy = date.getFullYear();
+		if(dd<10) {
+			dd = '0'+dd
+		}
+		if(mm<10) {
+			mm = '0'+mm
+		}
+
+		return dd + '/' + mm + '/' + yyyy;;
+	}
+
+	window.onload = function() {
+		const date = new Date();
+		const newDate = addOneYear(date);
+		console.log(newDate); // 2023-04-20T00:00:00.000Z
+		// changeDate();
+		document.getElementById("f_ingreso").value = getDate(new Date());
+		document.getElementById("f_salida").value = getDate(addOneYear(new Date()));
+	};
+</script>
+
 <script src="./App.js" type="module"></script>
 </body>
 </html>
