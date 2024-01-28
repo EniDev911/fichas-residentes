@@ -171,11 +171,15 @@
 			<input type="text" class="form-control" name="trabajo_r1">
 		</div>
 	</fieldset>
-	<span class="d-block pb-2">Firma digital aqui</span>
-	<div class="signature mb-2" style="width: 100%; height: 200px;">
-		<canvas id="signature-canvas" style="border: 1px dashed red; width: 100%; height: 200px;"></canvas>
+	<div></div>
+	<div id="area_firma" style="margin: 20px 0">
+		<div class="flex" style="align-items: center;">
+			<button id="btn_firmar" type="button" class="btn btn-link">Firma digital aquí</button>
+		</div>
+		<div class="signature mb-2" style="width: 100%; height: 10px">
+			<canvas id="signature-canvas" style="border: 1px dashed red; width: 100%; height: 200px; visibility: hidden;"></canvas>
+		</div>
 	</div>
-
 	<button id="btn_agregar" class="btn btn-primary" type="button">Añadir otro residente</button>
 	<button id="pdfout" type="submit" class="btn btn-success">Descargar</button>
 	<button id="resetar" class="btn btn-warning" type="button" onclick="{window.location.reload()}" style="float: right;">Resetear</button>
@@ -183,6 +187,7 @@
 </div>
 
 <script src="./App.js" type="module"></script>
+
 
 </body>
 </html>

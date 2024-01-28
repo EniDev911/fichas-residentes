@@ -202,3 +202,23 @@ document.querySelectorAll("input[name='tipo_residente']").forEach((input) => {
 	input.addEventListener('change', handleOnChangeRadio);
 });
 
+	let activate = false;
+	document.getElementById('btn_firmar').addEventListener('click', (e) => {
+		if (activate) {
+
+		} else {
+			document.getElementById("signature-canvas").style.visibility = 'visible';
+			document.querySelector(".signature").style.height = '200px';
+			const div = document.createElement('div');
+			div.textContent = 'Resetear firma'
+			div.classList.add("btn", "btn-primary")
+			div.style.marginBottom = '5px';
+			div.id = "resetear_firma";
+			div.onclick = function() {
+				signaturePad.clear();
+			}
+			document.getElementById('btn_firmar').insertAdjacentElement("afterend", div);
+			e.target.style.display = 'none'
+			activate = true;
+		}
+	})
