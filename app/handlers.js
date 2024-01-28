@@ -1,150 +1,204 @@
+import { signaturePad } from "../App.js"
+
 const btnAgregar = document.querySelector('#btn_agregar');
 const form = document.querySelector("form");
 let aux = 1;
 
 function formatName(names){
-  const ans = names.toLowerCase();
-  const nameSplit = ans.split(" ");
+	const ans = names.toLowerCase();
+	const nameSplit = ans.split(" ");
 
-  const arrNames = nameSplit.map(function(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  });
+	const arrNames = nameSplit.map(function(str) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	});
 
-  return arrNames.join(" ")
+	return arrNames.join(" ")
 }
 
 
-form.addEventListener("submit", (event) => {
+
+form.addEventListener("submit", async (event) => {
 	event.preventDefault();
-  const doc = new jsPDF('p', 'pt', 'A4');
-  const margin = 20;
-  let scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
-  let scaleMobile = (doc.internal.pageSize.width - margin * 2) / document.body.getBoundingClientRect();
-  const dpto = document.getElementById("dpto");
-  const tipo_residente = document.querySelector('input[name="tipo_residente"]:checked').value;
-  const ingreso = document.getElementById("f_ingreso").value;
-  const salida = document.getElementById("f_salida").value;
-  const nombre_prop = document.getElementById("nombre_prop").value;
-  const rut_prop = document.getElementById("rut_prop").value;
-  const tel_prop = document.getElementById("tel_prop").value;
-  const mail_prop = document.getElementById("mail_prop").value;
-  const nombre_corredora = document.getElementById("nombre_corredora").value;
-  const rut_corredora = document.getElementById("rut_corredora").value;
-  const residentes = document.querySelectorAll(".residente");
+	const doc = new jsPDF('p', 'pt', 'A4');
+	const margin = 20;
+	let scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
+	let scaleMobile = (doc.internal.pageSize.width - margin * 2) / document.body.getBoundingClientRect();
+	const dpto = document.getElementById("dpto");
+	const tipo_residente = document.querySelector('input[name="tipo_residente"]:checked').value;
+	const ingreso = document.getElementById("f_ingreso").value;
+	const salida = document.getElementById("f_salida").value;
+	const nombre_prop = document.getElementById("nombre_prop").value;
+	const rut_prop = document.getElementById("rut_prop").value;
+	const tel_prop = document.getElementById("tel_prop").value;
+	const mail_prop = document.getElementById("mail_prop").value;
+	const nombre_corredora = document.getElementById("nombre_corredora").value;
+	const rut_corredora = document.getElementById("rut_corredora").value;
+	const residentes = document.querySelectorAll(".residente");
 
-  var xOffset = doc.internal.pageSize.width / 2;
-  let yOffset = 25
-  doc.setFontSize(20);
-  doc.text("Condominio Espacio Uno III", xOffset, yOffset,'center');
-  doc.setFontSize(12);
-  doc.text("Ficha de Residente", xOffset,(yOffset += 20),'center');
-  doc.setFontSize(20);
-  doc.text("DPTO. "+dpto.value, xOffset, (yOffset += 23), 'center');
-  doc.setFontSize(12);
-  doc.setFont(undefined, 'bold').text(tipo_residente.toUpperCase(), 40, (yOffset += 20));
-  doc.text("INGRESO:" ,315, yOffset);
-  doc.setFont(undefined, 'normal').text(ingreso, (320 + doc.getTextWidth("INGRESO:")), yOffset)
-  doc.setFont(undefined, 'bold').text("SALIDA:" , 450, yOffset);
-  doc.setFont(undefined, 'normal').text(salida, (455 + doc.getTextWidth("SALIDA:")), yOffset)
-  doc.setDrawColor(0, 0, 0);
-  doc.line(25, (yOffset += 10), 570, (yOffset));
-  doc.line(25, 98, 25, 828);
-  doc.line(570, 98, 570, 828);
-  doc.text("DATOS DEL PROPIETARIO: ", 40, (yOffset += 20));
-  let textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
-  doc.setDrawColor(255, 0, 0);
-  doc.line(40, (yOffset += 5), 40 + textWidth, yOffset)
-  doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
-  doc.setFont(undefined, 'normal').text(formatName(nombre_prop), (50 + doc.getTextWidth("Nombre:")), yOffset);
-  doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
-  doc.setFont(undefined, 'normal').text(rut_prop, (45 + doc.getTextWidth("Rut:")), yOffset);
-  // PHONE
-  doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
-  doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
-  // MAIL
-  doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-  doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
-  doc.setDrawColor(0, 0, 0);
-  doc.line(25, (yOffset += 10), 570, yOffset);
-  // CORREEDORA
-  doc.text("DATOS CORREDORA O ENCARGADO: ", 40, (yOffset += 20));
-  doc.setDrawColor(255, 0, 0);
-  doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS CORREDORA O ENCARGADO: "), yOffset)
-  doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
-  doc.setFont(undefined, 'normal').text(formatName(nombre_corredora), (50 + doc.getTextWidth("Nombre:")), yOffset);
-  // RUT
-  doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
-  doc.setFont(undefined, 'normal').text(rut_corredora, (45 + doc.getTextWidth("Rut:")), yOffset);
-  // PHONE
-  doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
-  doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
-  // MAIL
-  doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-  doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
-  doc.setDrawColor(0, 0, 0);
-  doc.line(25, (yOffset += 10), 570, yOffset);
+	const firma = signaturePad.toDataURL();
 
-  for (var i = 1; i < 6; i++) {
-    yOffset += 20;
-    doc.setFont(undefined, 'bold').text(`RESIDENTE ${i}`, xOffset, yOffset,'center');
-    // console.log(element.querySelector(`#nombre_r`${index+1}));
-    // NOMBRE
-    doc.text("Nombre:", 40, (yOffset += 20));
-    if (document.querySelector(`#nombre_r${i}`) !== null) {
-      doc.setFont(undefined, 'normal').text(formatName(document.querySelector(`#nombre_r${i}`).value), (50 + doc.getTextWidth("Nombre:")), yOffset);
-    }
-    // RUT
-    doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
-    if (document.querySelector(`#rut_r${i}`) !== null) {
-      doc.setFont(undefined, 'normal').text(document.querySelector(`#rut_r${i}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
-    }
-     // PHONE
-    doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
-    if (document.querySelector(`#tel_r${i}`) !== null) {
-      doc.setFont(undefined, 'normal').text(document.querySelector(`#tel_r${i}`).value, (210 + doc.getTextWidth("Télefono:")), yOffset);
-    }
-      // MAIL
-    doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-    if (document.querySelector(`#mail_r${i}`) !== null) {
-      doc.setFont(undefined, 'normal').text(document.querySelector(`#mail_r${i}`).value, (50 + doc.getTextWidth("Correo")) , yOffset);
-    }
-    // LINE
-    doc.line(25, (yOffset += 10), 570, yOffset);
-  }
+	var xOffset = doc.internal.pageSize.width / 2;
+	let yOffset = 25
+	doc.setFontSize(20);
+	doc.addImage(firma, 'PNG', 300, 765, 400, 60);
+	doc.text("Condominio Espacio Uno III", xOffset, yOffset,'center');
+	doc.setFontSize(12);
+	doc.text("Ficha de Residente", xOffset,(yOffset += 20),'center');
+	doc.setFontSize(20);
+	doc.text("DPTO. "+dpto.value, xOffset, (yOffset += 23), 'center');
+	doc.setFontSize(12);
+	doc.setFont(undefined, 'bold').text(tipo_residente.toUpperCase(), 40, (yOffset += 20));
+	doc.text("INGRESO:" ,315, yOffset);
+	doc.setFont(undefined, 'normal').text(ingreso, (320 + doc.getTextWidth("INGRESO:")), yOffset)
+	doc.setFont(undefined, 'bold').text("SALIDA:" , 450, yOffset);
+	doc.setFont(undefined, 'normal').text(salida, (455 + doc.getTextWidth("SALIDA:")), yOffset)
+	doc.setDrawColor(0, 0, 0);
+	doc.line(25, (yOffset += 10), 570, (yOffset));
+	doc.line(25, 98, 25, 828);
+	doc.line(570, 98, 570, 828);
+	doc.setFont(undefined, 'bold').text("DATOS DEL PROPIETARIO: ", 40, (yOffset += 20));
+	let textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
+	doc.setDrawColor(255, 0, 0);
+	doc.line(40, (yOffset += 5), 40 + textWidth, yOffset)
+	doc.text("Nombre:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(formatName(nombre_prop), (50 + doc.getTextWidth("Nombre:")), yOffset);
+	doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(rut_prop, (45 + doc.getTextWidth("Rut:")), yOffset);
+	// PHONE
+	doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+	doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+	// MAIL
+	doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+	doc.setDrawColor(0, 0, 0);
+	doc.line(25, (yOffset += 10), 570, yOffset);
+	// CORREEDORA
+	doc.text("DATOS CORREDORA O ENCARGADO: ", 40, (yOffset += 20));
+	doc.setDrawColor(255, 0, 0);
+	doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS CORREDORA O ENCARGADO: "), yOffset)
+	doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(formatName(nombre_corredora), (50 + doc.getTextWidth("Nombre:")), yOffset);
+	// RUT
+	doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(rut_corredora, (45 + doc.getTextWidth("Rut:")), yOffset);
+	// PHONE
+	doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+	doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+	// MAIL
+	doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+	doc.setDrawColor(0, 0, 0);
+	doc.line(25, (yOffset += 10), 570, yOffset);
 
-  doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
-  // doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
+	for (var i = 1; i < 6; i++) {
+		yOffset += 20;
+		doc.setFont(undefined, 'bold').text(`RESIDENTE ${i}`, xOffset, yOffset,'center');
+		// console.log(element.querySelector(`#nombre_r`${index+1}));
+		// NOMBRE
+		doc.text("Nombre:", 40, (yOffset += 20));
+		if (document.querySelector(`#nombre_r${i}`) !== null) {
+			doc.setFont(undefined, 'normal').text(formatName(document.querySelector(`#nombre_r${i}`).value), (50 + doc.getTextWidth("Nombre:")), yOffset);
+		}
+		// RUT
+		doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
+		if (document.querySelector(`#rut_r${i}`) !== null) {
+			doc.setFont(undefined, 'normal').text(document.querySelector(`#rut_r${i}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
+		}
+		 // PHONE
+		doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+		if (document.querySelector(`#tel_r${i}`) !== null) {
+			doc.setFont(undefined, 'normal').text(document.querySelector(`#tel_r${i}`).value, (210 + doc.getTextWidth("Télefono:")), yOffset);
+		}
+			// MAIL
+		doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+		if (document.querySelector(`#mail_r${i}`) !== null) {
+			doc.setFont(undefined, 'normal').text(document.querySelector(`#mail_r${i}`).value, (50 + doc.getTextWidth("Correo")) , yOffset);
+		}
+		// LINE
+		doc.line(25, (yOffset += 10), 570, yOffset);
+	}
+
+	doc.setFont(undefined, 'bold').text("Cantidad total de personas:", 40, (yOffset += 20));
+	doc.text("Firma responsable:", 430, yOffset);
+	doc.setFont(undefined, 'normal').text(residentes.length.toString(), (55 + doc.getTextWidth("Cantidad total de personas:")), yOffset);
+	doc.setFont(undefined, 'bold').text("Propietario autoriza mascota:", 40, (yOffset += 20));
+
+	// doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
+	doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
 
 })
 
 btnAgregar.onclick = () => {
-  let html = document.getElementById(`residente_${aux}`)
-  aux++;
-  let template = `
-    <fieldset id="residente_${aux}" class="residente">
-    <h3 align="center">RESIDENTE ${aux}</h3>
-    <div class="form-group">
-      <label for="nombre_r${aux}">Nombre: </label>
-      <input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}">
-    </div>
-    <div class="flex">
-      <div class="form-group">
-        <label for="rut_r${aux}">Rut: </label>
-        <input type="text" class="form-control" name="rut_r1" id="rut_r${aux}">
-      </div>
-      <div class="form-group">
-        <label for="tel_r${aux}">Teléfono: </label>
-        <input type="text" class="form-control" name="tel_r1">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
-      <input type="text" class="form-control" name="trabajo_r1">
-    </div>
-  </fieldset>`
-  if (aux < 7){
-    html.insertAdjacentHTML('afterend', template);
-    return
-  }
-  alert("El límite son 6 residentes");
+	let html = document.getElementById(`residente_${aux}`)
+	aux++;
+	let template = `
+		<fieldset id="residente_${aux}" class="residente">
+		<h3 align="center">RESIDENTE ${aux}</h3>
+		<div class="form-group">
+			<label for="nombre_r${aux}">Nombre: </label>
+			<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}">
+		</div>
+		<div class="flex">
+			<div class="form-group">
+				<label for="rut_r${aux}">Rut: </label>
+				<input type="text" class="form-control" name="rut_r1" id="rut_r${aux}">
+			</div>
+			<div class="form-group">
+				<label for="tel_r${aux}">Teléfono: </label>
+				<input type="text" class="form-control" name="tel_r1">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
+			<input type="text" class="form-control" name="trabajo_r1">
+		</div>
+	</fieldset>`
+	if (aux < 7){
+		html.insertAdjacentHTML('afterend', template);
+		return
+	}
+	alert("El límite son 5 residentes");
 }
+
+function addOneYear(date) {
+			date.setFullYear(date.getFullYear() + 1);
+			return date;
+}
+
+function getDate(date) {
+		// var today = new Date();
+		var dd = date.getDate();
+		var mm = date.getMonth()+1; //Enero es 0!
+		var yyyy = date.getFullYear();
+		if(dd<10) {
+			dd = '0'+dd
+		}
+		if(mm<10) {
+			mm = '0'+mm
+		}
+
+		return dd + '/' + mm + '/' + yyyy;;
+}
+
+
+function handleOnChangeRadio(event) {
+	let date = new Date()
+	if (event.target.id === "turistas"){
+		document.getElementById("f_ingreso").value = getDate(date);
+		date.setDate(date.getDate() + 1)
+		document.getElementById("f_salida").value = getDate(date)
+	}
+	else if (event.target.id === "anio_corrido") {
+		// alert('Checked radio with ID = ' + event.target.id);
+		document.getElementById("f_ingreso").value = getDate(date);
+		document.getElementById("f_salida").value = getDate(addOneYear(date));
+	} else if (event.target.id === "mar_dic") {
+		document.getElementById("f_ingreso").value = getDate(new Date());
+		document.getElementById("f_salida").value = "31/12/"+date.getFullYear()
+	}
+}
+
+document.querySelectorAll("input[name='tipo_residente']").forEach((input) => {
+	input.addEventListener('change', handleOnChangeRadio);
+});
+

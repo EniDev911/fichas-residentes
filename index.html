@@ -30,32 +30,22 @@
       </script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
 </head>
 <body>
 	<div id="main">
 	<h1 align="center">Condominio Espacio Uno III</h1>
 	<h2 align="center">Ficha de Residente</h2>
 	<form class="container">
-	<div class="flex">
-				<h3>Número de Departamento:</h3>
-				<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="dpto">
-				<option value="A 101">A 101</option>
-				</select>
-	</div>
-		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
-		<div class="flex">
-		<div>
-			<input type="radio" name="tipo_residente" value="turistas" id="turistas" checked> <label for="turistas">Pasajero/Turista</label>
-		</div>
-		<div>
-			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
-		</div>
-		<div>
-			<input type="radio" name="tipo_residente" value="marzo - diciembre" id="mar_dic"> <label for="mar_dic">Marzo - Diciembre</label>
-		</div>
-		</div>
 	<fieldset class="bg-info">
 		<h3>DATOS DEL PROPIETARIO <span style="color: red; white-space: pre">(NO CONYUGE, NO CORREDORA)</span></h3>
+		<div class="form-group">
+				<label for="nro_dpto">N° Departamento:</label>
+				<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="dpto" class="form-control">
+				<option value="A 101">A 101</option>
+				</select>
+		</div>
 		<div class="form-group">
 			<label for="nombre_prop">Nombre: </label>
 			<input type="text" name="nombre_prop" class="form-control" id="nombre_prop" required style="text-transform: capitalize;">
@@ -76,7 +66,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<h3>Datos corredora o encargado (SI APLICA)</h3>
+		<h3>DATOS CORREDORA O ENCARGADO (SI APLICA)</h3>
 		<div class="form-group">
 			<label for="nombre_corredora">Nombre</label>
 			<input type="text" name="nombre_corredora" class="form-control" id="nombre_corredora">
@@ -119,7 +109,18 @@
 	</fieldset>
 	<fieldset id="resumen" class="bg-warning">
 		<h2>PERIODO DE ESTANCIA</h2>
-
+		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
+		<div class="flex">
+		<div>
+			<input type="radio" name="tipo_residente" value="turistas" id="turistas" checked> <label for="turistas">Pasajero/Turista</label>
+		</div>
+		<div>
+			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
+		</div>
+		<div>
+			<input type="radio" name="tipo_residente" value="marzo - diciembre" id="mar_dic"> <label for="mar_dic">Marzo - Diciembre</label>
+		</div>
+		</div>
 	<div class="flex" style="padding-top:15px; ">
       <div class='col-sm-6' style="padding: 0;">
          <div class="form-group">
@@ -153,12 +154,12 @@
 		<h3 align="center">RESIDENTE 1</h3>
 		<div class="form-group">
 			<label for="nombre_r1">Nombre: </label>
-			<input type="text" class="form-control" name="nombre_r1" id="nombre_r1">
+			<input type="text" class="form-control" name="nombre_r1" id="nombre_r1" required>
 		</div>
 		<div class="flex">
 			<div class="form-group">
 				<label for="rut_r1">Rut: </label>
-				<input type="text" class="form-control" name="rut_r1" id="rut_r1">
+				<input type="text" class="form-control" name="rut_r1" id="rut_r1" required>
 			</div>
 			<div class="form-group">
 				<label for="tel_r1">Teléfono: </label>
@@ -170,43 +171,18 @@
 			<input type="text" class="form-control" name="trabajo_r1">
 		</div>
 	</fieldset>
+	<span class="d-block pb-2">Firma digital aqui</span>
+	<div class="signature mb-2" style="width: 100%; height: 200px;">
+		<canvas id="signature-canvas" style="border: 1px dashed red; width: 100%; height: 200px;"></canvas>
+	</div>
+
 	<button id="btn_agregar" class="btn btn-primary" type="button">Añadir otro residente</button>
 	<button id="pdfout" type="submit" class="btn btn-success">Descargar</button>
 	<button id="resetar" class="btn btn-warning" type="button" onclick="{window.location.reload()}" style="float: right;">Resetear</button>
 </form>
 </div>
-<script>
-	function addOneYear(date) {
-  		date.setFullYear(date.getFullYear() + 1);
-  		return date;
-	}
-
-
-	function getDate(date) {
-		// var today = new Date();
-		var dd = date.getDate();
-		var mm = date.getMonth()+1; //Enero es 0!
-		var yyyy = date.getFullYear();
-		if(dd<10) {
-			dd = '0'+dd
-		}
-		if(mm<10) {
-			mm = '0'+mm
-		}
-
-		return dd + '/' + mm + '/' + yyyy;;
-	}
-
-	window.onload = function() {
-		const date = new Date();
-		const newDate = addOneYear(date);
-		console.log(newDate); // 2023-04-20T00:00:00.000Z
-		// changeDate();
-		document.getElementById("f_ingreso").value = getDate(new Date());
-		document.getElementById("f_salida").value = getDate(addOneYear(new Date()));
-	};
-</script>
 
 <script src="./App.js" type="module"></script>
+
 </body>
 </html>
