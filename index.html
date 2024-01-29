@@ -39,7 +39,7 @@
 	<h2 align="center">Ficha de Residente</h2>
 	<form class="container">
 	<fieldset class="bg-info">
-		<h3>DATOS DEL PROPIETARIO <span style="color: red; white-space: pre">(NO CONYUGE, NO CORREDORA)</span></h3>
+		<h3>DATOS DEL PROPIETARIO (<span style="color: red; white-space: pre">NO CONYUGE, NO CORREDORA</span>)</h3>
 		<div class="form-group">
 				<label for="nro_dpto">N° Departamento:</label>
 				<select class="selectpicker" data-show-subtext="true" data-live-search="true" id="dpto" class="form-control">
@@ -52,8 +52,8 @@
 		</div>
 		<div class="flex">
 			<div class="form-group">
-				<label for="rut_prop">Rut: </label>
-				<input type="text" name="rut_prop" class="form-control" id="rut_prop" required>
+				<label for="rut_prop">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
+				<input type="tel" name="rut_prop" class="form-control" id="rut_prop" required>
 			</div>
 			<div class="form-group">
 				<label for="tel_prop">Teléfono</label>
@@ -65,16 +65,16 @@
 			</div>
 		</div>
 	</fieldset>
-	<fieldset>
-		<h3>DATOS CORREDORA O ENCARGADO (SI APLICA)</h3>
+	<fieldset class="bg-success">
+		<h3>DATOS CORREDORA O ENCARGADO (<span style="color: red; white-space: pre">SOLO SI APLICA</span>)</h3>
 		<div class="form-group">
 			<label for="nombre_corredora">Nombre</label>
 			<input type="text" name="nombre_corredora" class="form-control" id="nombre_corredora">
 		</div>
 		<div class="flex">
 			<div class="form-group">
-				<label for="rut_corredora">Rut: </label>
-				<input type="text" name="rut_corredora" class="form-control" id="rut_corredora">
+				<label for="rut_corredora">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
+				<input type="tel" name="rut_corredora" class="form-control" id="rut_corredora">
 			</div>
 			<div class="form-group">
 				<label for="tel_corredora">Teléfono</label>
@@ -87,15 +87,15 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<h3>Datos Padre encargado de departamento <span style="color: red; white-space: pre">(solo para arrendatarios estudiantes)</span></h3>
+		<h3>Datos Padre encargado de departamento (<span style="color: red; white-space: pre">solo para arrendatarios estudiantes</span>)</h3>
 		<div class="form-group">
 			<label for="nombre_tutor">Nombre: </label>
 			<input type="text" name="nombre_tutor" class="form-control">
 		</div>
 		<div class="flex">
 			<div class="form-group">
-				<label for="rut_tutor">Rut: </label>
-				<input type="text" name="rut_tutor" class="form-control">
+				<label for="rut_tutor">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
+				<input type="tel" name="rut_tutor" class="form-control" id="rut_tutor">
 			</div>
 			<div class="form-group">
 				<label for="tel_tutor">Teléfono</label>
@@ -158,8 +158,8 @@
 		</div>
 		<div class="flex">
 			<div class="form-group">
-				<label for="rut_r1">Rut: </label>
-				<input type="text" class="form-control" name="rut_r1" id="rut_r1" required>
+				<label for="rut_r1">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
+				<input type="tel" class="form-control" name="rut_r1" id="rut_r1" required>
 			</div>
 			<div class="form-group">
 				<label for="tel_r1">Teléfono: </label>
@@ -171,7 +171,8 @@
 			<input type="text" class="form-control" name="trabajo_r1">
 		</div>
 	</fieldset>
-	<div></div>
+	<input type="checkbox" onChange="cambiarCondiciones()" id="condiciones"  name="condiciones"/> Estoy de acuerdo con los <a href="terminos.html" target="_blank" class="enlace-terminos">términos y condiciones</a> <br/>
+	<button id="btn_agregar" class="btn btn-primary" type="button">Añadir otro residente</button>
 	<div id="area_firma" style="margin: 20px 0">
 		<div class="flex" style="align-items: center;">
 			<button id="btn_firmar" type="button" class="btn btn-link">Firma digital aquí</button>
@@ -180,14 +181,11 @@
 			<canvas id="signature-canvas" style="border: 1px dashed red; width: 100%; height: 200px; visibility: hidden;"></canvas>
 		</div>
 	</div>
-	<button id="btn_agregar" class="btn btn-primary" type="button">Añadir otro residente</button>
 	<button id="pdfout" type="submit" class="btn btn-success">Descargar</button>
 	<button id="resetar" class="btn btn-warning" type="button" onclick="{window.location.reload()}" style="float: right;">Resetear</button>
 </form>
 </div>
-
 <script src="./App.js" type="module"></script>
-
 
 </body>
 </html>

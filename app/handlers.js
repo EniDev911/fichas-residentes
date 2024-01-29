@@ -1,4 +1,5 @@
 import { signaturePad } from "../App.js"
+import { darFormatoRUT } from "./utils.js";
 
 const btnAgregar = document.querySelector('#btn_agregar');
 const form = document.querySelector("form");
@@ -128,6 +129,9 @@ form.addEventListener("submit", async (event) => {
 
 })
 
+
+
+
 btnAgregar.onclick = () => {
 	let html = document.getElementById(`residente_${aux}`)
 	aux++;
@@ -136,21 +140,21 @@ btnAgregar.onclick = () => {
 		<h3 align="center">RESIDENTE ${aux}</h3>
 		<div class="form-group">
 			<label for="nombre_r${aux}">Nombre: </label>
-			<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}">
+			<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}" required>
 		</div>
 		<div class="flex">
 			<div class="form-group">
 				<label for="rut_r${aux}">Rut: </label>
-				<input type="text" class="form-control" name="rut_r1" id="rut_r${aux}">
+				<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" required>
 			</div>
 			<div class="form-group">
 				<label for="tel_r${aux}">Teléfono: </label>
-				<input type="text" class="form-control" name="tel_r1">
+				<input type="text" class="form-control" name="tel_r1" id="tel_r${aux}">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
-			<input type="text" class="form-control" name="trabajo_r1">
+			<input type="text" class="form-control" name="trabajo_r1" id="trabajo_r${aux}">
 		</div>
 	</fieldset>`
 	if (aux < 7){
@@ -222,3 +226,12 @@ document.querySelectorAll("input[name='tipo_residente']").forEach((input) => {
 			activate = true;
 		}
 	})
+
+	// format rut
+document.querySelectorAll('input[id^="rut"]').forEach((input) => {
+	input.addEventListener('input', (e) => {
+    let rutFormateado = darFormatoRUT(e.target.value);
+    e.target.value = rutFormateado;
+	});
+})
+
