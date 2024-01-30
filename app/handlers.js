@@ -124,13 +124,10 @@ form.addEventListener("submit", async (event) => {
 	doc.setFont(undefined, 'normal').text(residentes.length.toString(), (55 + doc.getTextWidth("Cantidad total de personas:")), yOffset);
 	doc.setFont(undefined, 'bold').text("Propietario autoriza mascota:", 40, (yOffset += 20));
 
-	// doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
-	doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
+	doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
+	// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
 
 })
-
-
-
 
 btnAgregar.onclick = () => {
 	let html = document.getElementById(`residente_${aux}`)
@@ -149,7 +146,7 @@ btnAgregar.onclick = () => {
 			</div>
 			<div class="form-group">
 				<label for="tel_r${aux}">Teléfono: </label>
-				<input type="text" class="form-control" name="tel_r1" id="tel_r${aux}">
+				<input type="tel" class="form-control" name="tel_r1" id="tel_r${aux}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -227,11 +224,26 @@ document.querySelectorAll("input[name='tipo_residente']").forEach((input) => {
 		}
 	})
 
-	// format rut
-document.querySelectorAll('input[id^="rut"]').forEach((input) => {
-	input.addEventListener('input', (e) => {
+
+function handleOnInput(e) {
     let rutFormateado = darFormatoRUT(e.target.value);
     e.target.value = rutFormateado;
-	});
-})
+}
+
+function on(eventName, selector, handler) {
+	document.addEventListener(eventName, function(event) {
+	  const elements = document.querySelectorAll(selector);
+	  const path = event.composedPath();
+	  path.forEach(function(node) {
+		elements.forEach(function(elem) {
+		  if (node === elem) {
+			handler.call(elem, event);
+		  }
+		});
+	  });
+	}, true);
+}
+
+on('input', 'input[id^="rut"]', handleOnInput);
+
 
