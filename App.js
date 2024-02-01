@@ -1,4 +1,4 @@
-import { cargarDepartamentos } from "./app/pre-carga.js";
+
 import "./app/handlers.js";
 
 
@@ -11,7 +11,7 @@ function initApplication() {
     canvas.height = canvas.offsetHeight;
     canvas.width = canvas.offsetWidth;
     signaturePad = new SignaturePad(canvas, {});
-
+    document.getElementById("turistas").checked = true;
 }
 
 document.onreadystatechange = () => {

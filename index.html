@@ -35,10 +35,13 @@
 </head>
 <body>
 	<div id="main">
-	<h1 align="center">Condominio Espacio Uno III</h1>
-	<h2 align="center">Ficha de Residente</h2>
-	<form class="container">
-	<fieldset class="bg-info">
+		<div class="container">
+			<img src="logo.png" class="hidden-xs" alt="logo" height="75" style="position: absolute; margin-top: 10px;">
+			<h1 align="center">Condominio Espacio Uno III</h1>
+			<h2 align="center">Ficha de Residente</h2>
+		</div>
+		<form class="container">
+			<fieldset class="bg-info">
 		<h3>DATOS DEL PROPIETARIO (<span style="color: red; white-space: pre">NO CONYUGE, NO CORREDORA</span>)</h3>
 		<div class="form-group">
 				<label for="nro_dpto">N° Departamento:</label>
@@ -48,16 +51,16 @@
 		</div>
 		<div class="form-group">
 			<label for="nombre_prop">Nombre: </label>
-			<input type="text" name="nombre_prop" class="form-control" id="nombre_prop" required style="text-transform: capitalize;">
+			<input type="text" name="nombre_prop" class="form-control" id="nombre_prop" placeholder="Nombre propietario" required>
 		</div>
 		<div class="flex">
 			<div class="form-group">
 				<label for="rut_prop">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
-				<input type="tel" name="rut_prop" class="form-control" id="rut_prop" required>
+				<input type="tel" name="rut_prop" class="form-control" id="rut_prop" placeholder="Rut propietario" required>
 			</div>
 			<div class="form-group">
 				<label for="tel_prop">Teléfono</label>
-				<input type="tel" name="tel_prop" class="form-control" id="tel_prop">
+				<input type="tel" name="tel_prop" class="form-control" id="tel_prop" placeholder="(Ej. 984687949)" required>
 			</div>
 			<div class="form-group">
 				<label for="mail_prop">Correo: </label>
@@ -78,7 +81,7 @@
 			</div>
 			<div class="form-group">
 				<label for="tel_corredora">Teléfono</label>
-				<input type="text" name="tel_corredora" class="form-control" id="tel_corredora">
+				<input type="text" name="tel_corredora" class="form-control" id="tel_corredora" placeholder="(Ej. 984687949)">
 			</div>
 			<div class="form-group">
 				<label for="mail_corredora">Correo: </label>
@@ -112,7 +115,7 @@
 		<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
 		<div class="flex">
 		<div>
-			<input type="radio" name="tipo_residente" value="turistas" id="turistas" checked> <label for="turistas">Pasajero/Turista</label>
+			<input type="radio" name="tipo_residente" value="turistas" id="turistas"> <label for="turistas">Pasajero/Turista</label>
 		</div>
 		<div>
 			<input type="radio" name="tipo_residente" value="año corrido" id="anio_corrido"> <label for="anio_corrido">Año Corrido</label>
@@ -154,7 +157,7 @@
 		<h3 align="center">RESIDENTE 1</h3>
 		<div class="form-group">
 			<label for="nombre_r1">Nombre: </label>
-			<input type="text" class="form-control" name="nombre_r1" id="nombre_r1" required>
+			<input type="text" class="form-control" name="nombre_r1" id="nombre_r1" placeholder="Nombre residente 1" required>
 		</div>
 		<div class="flex">
 			<div class="form-group">

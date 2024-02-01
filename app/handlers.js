@@ -16,14 +16,9 @@ function formatName(names){
 	return arrNames.join(" ")
 }
 
-
-
 form.addEventListener("submit", async (event) => {
 	event.preventDefault();
 	const doc = new jsPDF('p', 'pt', 'A4');
-	const margin = 20;
-	let scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
-	let scaleMobile = (doc.internal.pageSize.width - margin * 2) / document.body.getBoundingClientRect();
 	const dpto = document.getElementById("dpto");
 	const tipo_residente = document.querySelector('input[name="tipo_residente"]:checked').value;
 	const ingreso = document.getElementById("f_ingreso").value;
@@ -34,6 +29,7 @@ form.addEventListener("submit", async (event) => {
 	const mail_prop = document.getElementById("mail_prop").value;
 	const nombre_corredora = document.getElementById("nombre_corredora").value;
 	const rut_corredora = document.getElementById("rut_corredora").value;
+	const tel_corredora = document.getElementById("tel_corredora").value;
 	const residentes = document.querySelectorAll(".residente");
 
 	const firma = signaturePad.toDataURL();
@@ -73,18 +69,18 @@ form.addEventListener("submit", async (event) => {
 	doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
 	doc.setDrawColor(0, 0, 0);
 	doc.line(25, (yOffset += 10), 570, yOffset);
-	// CORREEDORA
-	doc.text("DATOS CORREDORA O ENCARGADO: ", 40, (yOffset += 20));
+	// CORREDORA
+	doc.setFont(undefined, 'bold').text("DATOS CORREDORA O ENCARGADO: ", 40, (yOffset += 20));
 	doc.setDrawColor(255, 0, 0);
 	doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS CORREDORA O ENCARGADO: "), yOffset)
-	doc.setFont(undefined, 'bold').text("Nombre:", 40, (yOffset += 20));
+	doc.text("Nombre:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(formatName(nombre_corredora), (50 + doc.getTextWidth("Nombre:")), yOffset);
 	// RUT
 	doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(rut_corredora, (45 + doc.getTextWidth("Rut:")), yOffset);
 	// PHONE
 	doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
-	doc.setFont(undefined, 'normal').text(tel_prop, (210 + doc.getTextWidth("Télefono:")), yOffset);
+	doc.setFont(undefined, 'normal').text(tel_corredora, (210 + doc.getTextWidth("Télefono:")), yOffset);
 	// MAIL
 	doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
@@ -202,7 +198,6 @@ function handleOnChangeRadio(event) {
 document.querySelectorAll("input[name='tipo_residente']").forEach((input) => {
 	input.addEventListener('change', handleOnChangeRadio);
 });
-
 	let activate = false;
 	document.getElementById('btn_firmar').addEventListener('click', (e) => {
 		if (activate) {
