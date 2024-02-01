@@ -1,4 +1,4 @@
-
+import { cargarDepartamentos } from "./app/pre-carga.js"
 import "./app/handlers.js";
 
 
