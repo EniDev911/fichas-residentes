@@ -30,6 +30,7 @@ form.addEventListener("submit", async (event) => {
 	const nombre_corredora = document.getElementById("nombre_corredora").value;
 	const rut_corredora = document.getElementById("rut_corredora").value;
 	const tel_corredora = document.getElementById("tel_corredora").value;
+	const mail_corredora = document.getElementById("mail_corredora").value;
 	const residentes = document.querySelectorAll(".residente");
 
 	const firma = signaturePad.toDataURL();
@@ -83,7 +84,7 @@ form.addEventListener("submit", async (event) => {
 	doc.setFont(undefined, 'normal').text(tel_corredora, (210 + doc.getTextWidth("Télefono:")), yOffset);
 	// MAIL
 	doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-	doc.setFont(undefined, 'normal').text(mail_prop, (50 + doc.getTextWidth("Correo")) , yOffset);
+	doc.setFont(undefined, 'normal').text(mail_corredora, (50 + doc.getTextWidth("Correo")) , yOffset);
 	doc.setDrawColor(0, 0, 0);
 	doc.line(25, (yOffset += 10), 570, yOffset);
 
