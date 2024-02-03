@@ -1,7 +1,6 @@
 import { cargarDepartamentos } from "./app/pre-carga.js"
 import "./app/handlers.js";
 
-
 export let signaturePad = null;
 
 
@@ -12,6 +11,7 @@ function initApplication() {
     canvas.width = canvas.offsetWidth;
     signaturePad = new SignaturePad(canvas, {});
     document.getElementById("turistas").checked = true;
+
 }
 
 document.onreadystatechange = () => {
