@@ -103,15 +103,15 @@ form.addEventListener("submit", async (event) => {
 			doc.setFont(undefined, 'normal').text(document.querySelector(`#rut_r${i}`).value, (45 + doc.getTextWidth("Rut:")), yOffset);
 		}
 		 // PHONE
-		doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
-		if (document.querySelector(`#tel_r${i}`) !== null) {
-			doc.setFont(undefined, 'normal').text(document.querySelector(`#tel_r${i}`).value, (210 + doc.getTextWidth("Télefono:")), yOffset);
-		}
+		 doc.setFont(undefined, 'bold').text("Télefono:", 200, yOffset);
+		 if (document.querySelector(`#tel_r${i}`) !== null) {
+		 	doc.setFont(undefined, 'normal').text(document.querySelector(`#tel_r${i}`).value, (210 + doc.getTextWidth("Télefono:")), yOffset);
+		 }
 			// MAIL
-		doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-		if (document.querySelector(`#mail_r${i}`) !== null) {
-			doc.setFont(undefined, 'normal').text(document.querySelector(`#mail_r${i}`).value, (50 + doc.getTextWidth("Correo")) , yOffset);
-		}
+			doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
+			if (document.querySelector(`#mail_r${i}`) !== null) {
+				doc.setFont(undefined, 'normal').text(document.querySelector(`#mail_r${i}`).value, (50 + doc.getTextWidth("Correo")) , yOffset);
+			}
 		// LINE
 		doc.line(25, (yOffset += 10), 570, yOffset);
 	}
@@ -131,26 +131,26 @@ btnAgregar.onclick = () => {
 	let html = document.getElementById(`residente_${aux}`)
 	aux++;
 	let template = `
-		<fieldset id="residente_${aux}" class="residente">
-		<h3 align="center">RESIDENTE ${aux}</h3>
-		<div class="form-group">
-			<label for="nombre_r${aux}">Nombre: </label>
-			<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}" required>
-		</div>
-		<div class="flex">
-			<div class="form-group">
-				<label for="rut_r${aux}">Rut: </label>
-				<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" required>
-			</div>
-			<div class="form-group">
-				<label for="tel_r${aux}">Teléfono: </label>
-				<input type="tel" class="form-control" name="tel_r1" id="tel_r${aux}">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
-			<input type="text" class="form-control" name="trabajo_r1" id="trabajo_r${aux}">
-		</div>
+	<fieldset id="residente_${aux}" class="residente">
+	<h3 align="center">RESIDENTE ${aux}</h3>
+	<div class="form-group">
+	<label for="nombre_r${aux}">Nombre: </label>
+	<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}" required>
+	</div>
+	<div class="flex">
+	<div class="form-group">
+	<label for="rut_r${aux}">Rut: </label>
+	<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" required>
+	</div>
+	<div class="form-group">
+	<label for="tel_r${aux}">Teléfono: </label>
+	<input type="tel" class="form-control" name="tel_r1" id="tel_r${aux}">
+	</div>
+	</div>
+	<div class="form-group">
+	<label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
+	<input type="text" class="form-control" name="trabajo_r1" id="trabajo_r${aux}">
+	</div>
 	</fieldset>`
 	if (aux < 7){
 		html.insertAdjacentHTML('afterend', template);
@@ -160,8 +160,8 @@ btnAgregar.onclick = () => {
 }
 
 function addOneYear(date) {
-			date.setFullYear(date.getFullYear() + 1);
-			return date;
+	date.setFullYear(date.getFullYear() + 1);
+	return date;
 }
 
 function getDate(date) {
@@ -177,16 +177,16 @@ function getDate(date) {
 		}
 
 		return dd + '/' + mm + '/' + yyyy;;
-}
-
-async function handleOnChangeRadio(event) {
-	let date = new Date()
-	if (event.target.id === "turistas"){
-		document.getElementById("f_ingreso").value = getDate(date);
-		date.setDate(date.getDate() + 1)
-		document.getElementById("f_salida").value = getDate(date)
 	}
-	else if (event.target.id === "anio_corrido") {
+
+	async function handleOnChangeRadio(event) {
+		let date = new Date()
+		if (event.target.id === "turistas"){
+			document.getElementById("f_ingreso").value = getDate(date);
+			date.setDate(date.getDate() + 1)
+			document.getElementById("f_salida").value = getDate(date)
+		}
+		else if (event.target.id === "anio_corrido") {
 		// alert('Checked radio with ID = ' + event.target.id);
 		document.getElementById("f_ingreso").value = getDate(date);
 		document.getElementById("f_salida").value = getDate(addOneYear(date));
@@ -195,61 +195,64 @@ async function handleOnChangeRadio(event) {
 		document.getElementById("f_salida").value = "31/12/"+date.getFullYear()
 	} else if (event.target.id === "si") {
 		Swal.fire({
-		  title: "<h1></H1>IMPORTANTE</h1>",
-		  icon: "info",
-		  text: "Modal with a custom image.",
-		  width: "90%",
-		  html: `
-    		<p style="font-size: 1.8em">Ademas deberá <b>enviar un correo a <a href="mailto:comite.espaciouno@gmail.com">comite.espaciouno3@gmail.com</a></b> y adjuntar la documentación de desparasitación y vacunación de las mascotas.</p>
-  				`,
-  		  customClass: {
-  		  	confirmButton: "btn btn-success btn-lg"
-  		  }
+			title: "<h1></H1>IMPORTANTE</h1>",
+			icon: "info",
+			text: "Modal with a custom image.",
+			width: "90%",
+			html: `
+			<p style="font-size: 1.8em">Ademas deberá <b>enviar un correo a la <a href="mailto:comite.espaciouno@gmail.com">administración</a></b> y adjuntar la documentación de desparasitación y vacunación de las mascotas.</p>
+			`,
+			customClass: {
+				confirmButton: "btn btn-success btn-lg"
+			}
 		});
+		document.getElementById("box_mascotas").classList.remove("hidden")
+	}else if (event.target.id === "no") {
+		document.getElementById("box_mascotas").classList.add("hidden")
 	}
 }
 
 document.querySelectorAll("input[type='radio']").forEach((input) => {
 	input.addEventListener('change', handleOnChangeRadio);
 });
-	let activate = false;
-	document.getElementById('btn_firmar').addEventListener('click', (e) => {
-		if (activate) {
+let activate = false;
+document.getElementById('btn_firmar').addEventListener('click', (e) => {
+	if (activate) {
 
-		} else {
-			document.getElementById("signature-canvas").style.visibility = 'visible';
-			document.querySelector(".signature").style.height = '200px';
-			const div = document.createElement('div');
-			div.textContent = 'Resetear firma'
-			div.classList.add("btn", "btn-primary")
-			div.style.marginBottom = '5px';
-			div.id = "resetear_firma";
-			div.onclick = function() {
-				signaturePad.clear();
-			}
-			document.getElementById('btn_firmar').insertAdjacentElement("afterend", div);
-			e.target.style.display = 'none'
-			activate = true;
+	} else {
+		document.getElementById("signature-canvas").style.visibility = 'visible';
+		document.querySelector(".signature").style.height = '200px';
+		const div = document.createElement('div');
+		div.textContent = 'Resetear firma'
+		div.classList.add("btn", "btn-primary")
+		div.style.marginBottom = '5px';
+		div.id = "resetear_firma";
+		div.onclick = function() {
+			signaturePad.clear();
 		}
-	})
+		document.getElementById('btn_firmar').insertAdjacentElement("afterend", div);
+		e.target.style.display = 'none'
+		activate = true;
+	}
+})
 
 
 function handleOnInput(e) {
-    let rutFormateado = darFormatoRUT(e.target.value);
-    e.target.value = rutFormateado;
+	let rutFormateado = darFormatoRUT(e.target.value);
+	e.target.value = rutFormateado;
 }
 
 function on(eventName, selector, handler) {
 	document.addEventListener(eventName, function(event) {
-	  const elements = document.querySelectorAll(selector);
-	  const path = event.composedPath();
-	  path.forEach(function(node) {
-		elements.forEach(function(elem) {
-		  if (node === elem) {
-			handler.call(elem, event);
-		  }
+		const elements = document.querySelectorAll(selector);
+		const path = event.composedPath();
+		path.forEach(function(node) {
+			elements.forEach(function(elem) {
+				if (node === elem) {
+					handler.call(elem, event);
+				}
+			});
 		});
-	  });
 	}, true);
 }
 
