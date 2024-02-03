@@ -32,7 +32,7 @@ form.addEventListener("submit", async (event) => {
 	const tel_corredora = document.getElementById("tel_corredora").value;
 	const mail_corredora = document.getElementById("mail_corredora").value;
 	const residentes = document.querySelectorAll(".residente");
-
+	const aut_mascota = document.querySelector('input[name="autorizacion_mascota"]:checked').value;
 	const firma = signaturePad.toDataURL();
 
 	var xOffset = doc.internal.pageSize.width / 2;
@@ -120,6 +120,7 @@ form.addEventListener("submit", async (event) => {
 	doc.text("Firma responsable:", 430, yOffset);
 	doc.setFont(undefined, 'normal').text(residentes.length.toString(), (55 + doc.getTextWidth("Cantidad total de personas:")), yOffset);
 	doc.setFont(undefined, 'bold').text("Propietario autoriza mascota:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(aut_mascota, (55 + doc.getTextWidth("Propietario autoriza mascota:")), yOffset);
 
 	doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
 	// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
@@ -178,8 +179,7 @@ function getDate(date) {
 		return dd + '/' + mm + '/' + yyyy;;
 }
 
-
-function handleOnChangeRadio(event) {
+async function handleOnChangeRadio(event) {
 	let date = new Date()
 	if (event.target.id === "turistas"){
 		document.getElementById("f_ingreso").value = getDate(date);
@@ -193,10 +193,23 @@ function handleOnChangeRadio(event) {
 	} else if (event.target.id === "mar_dic") {
 		document.getElementById("f_ingreso").value = getDate(new Date());
 		document.getElementById("f_salida").value = "31/12/"+date.getFullYear()
+	} else if (event.target.id === "si") {
+		Swal.fire({
+		  title: "<h1></H1>IMPORTANTE</h1>",
+		  icon: "info",
+		  text: "Modal with a custom image.",
+		  width: "90%",
+		  html: `
+    		<p style="font-size: 1.8em">Ademas deberá <b>enviar un correo a <a href="mailto:comite.espaciouno@gmail.com">comite.espaciouno3@gmail.com</a></b> y adjuntar la documentación de desparasitación y vacunación de las mascotas.</p>
+  				`,
+  		  customClass: {
+  		  	confirmButton: "btn btn-success btn-lg"
+  		  }
+		});
 	}
 }
 
-document.querySelectorAll("input[name='tipo_residente']").forEach((input) => {
+document.querySelectorAll("input[type='radio']").forEach((input) => {
 	input.addEventListener('change', handleOnChangeRadio);
 });
 	let activate = false;

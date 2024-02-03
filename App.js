@@ -10,8 +10,6 @@ function initApplication() {
     canvas.height = canvas.offsetHeight;
     canvas.width = canvas.offsetWidth;
     signaturePad = new SignaturePad(canvas, {});
-    document.getElementById("turistas").checked = true;
-
 }
 
 document.onreadystatechange = () => {
