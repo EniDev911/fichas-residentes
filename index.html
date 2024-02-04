@@ -89,27 +89,6 @@
 					</div>
 				</div>
 			</fieldset>
-			<fieldset>
-				<h3>Datos Padre encargado de departamento (<span style="color: red; white-space: pre">solo para arrendatarios estudiantes</span>)</h3>
-				<div class="form-group">
-					<label for="nombre_tutor">Nombre: </label>
-					<input type="text" name="nombre_tutor" class="form-control">
-				</div>
-				<div class="flex">
-					<div class="form-group">
-						<label for="rut_tutor">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
-						<input type="tel" name="rut_tutor" class="form-control" id="rut_tutor">
-					</div>
-					<div class="form-group">
-						<label for="tel_tutor">Teléfono</label>
-						<input type="text" name="tel_tutor" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="mail_tutor">Correo: </label>
-						<input type="text" name="mail_tutor" class="form-control">
-					</div>
-				</div>
-			</fieldset>
 			<fieldset id="resumen" class="bg-warning">
 				<h2>PERIODO DE ESTANCIA</h2>
 				<h3>Tipo de residente: <br><small style="color: red">(Marque solo una opción)</small></h3>
@@ -149,8 +128,26 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="patente">Vehiculo, modelo y patente</label>&nbsp;<strong>(<span style="color: red; white-space: pre;">solo UNO permitido</span>):</strong>
-					<input type="text" name="patente" class="form-control">
+					<h2 style="margin-bottom: 0">VEHÍCULO </h2>
+					<small style="color: red; white-space: pre; vertical-align: middle;">(solo UNO permitido)</small>
+					<div class="row" style="margin-top: 10px">
+						<div class="col-xs-12 col-lg-6" style="margin-bottom: 10px">
+							<div class="input-group">
+								<span class="input-group-addon">
+									Marca y Modelo
+								</span>
+								<input type="text" name="marca" class="form-control" placeholder="Ej: KIA SORENTO" id="marca" style="text-transform: uppercase;">
+							</div>
+						</div>
+						<div class="col-xs-8 col-lg-3">
+							<div class="input-group">
+								<span class="input-group-addon">
+									Patente
+								</span>
+								<input type="text" name="patente" class="form-control" placeholder="Ej: DCL878" id="patente" maxlength="6" style="text-transform: uppercase;">
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- Autorizo Mascotas -->
 				<p><b>¿Autoriza mascotas en el departamento?</b></p>
@@ -168,17 +165,17 @@
 							<span class="input-group-addon">
 								Perros <i class="fa-solid fa-dog"></i>
 							</span>
-							<input type="number" class="form-control" min="0" max="5" value="0">
+							<input type="number" class="form-control" min="0" max="5" value="0" inputmode="numeric" id="cant_perros">
 						</div><!-- /input-group -->
-					</div><!-- /.col-lg-6 -->
+					</div><!-- /.col -->
 					<div class="col-xs-6 col-lg-3">
 						<div class="input-group">
 							<span class="input-group-addon">
 								Gatos <i class="fa-solid fa-cat"></i>
 							</span>
-							<input type="number" class="form-control" min="0" max="4" value="0">
+							<input type="number" class="form-control" min="0" max="4" value="0" inputmode="numeric" id="cant_gatos">
 						</div><!-- /input-group -->
-					</div><!-- /.col-lg-6 -->
+					</div><!-- /.col -->
 				</div><!-- /.row -->
 			</fieldset>
 			<fieldset id="residente_1" class="residente">
@@ -190,7 +187,7 @@
 				<div class="flex">
 					<div class="form-group">
 						<label for="rut_r1">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
-						<input type="tel" class="form-control" name="rut_r1" id="rut_r1" required>
+						<input type="tel" class="form-control" name="rut_r1" id="rut_r1" placeholder="Rut residente 1" required>
 					</div>
 					<div class="form-group">
 						<label for="tel_r1">Teléfono: </label>

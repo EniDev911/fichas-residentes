@@ -33,6 +33,10 @@ form.addEventListener("submit", async (event) => {
 	const mail_corredora = document.getElementById("mail_corredora").value;
 	const residentes = document.querySelectorAll(".residente");
 	const aut_mascota = document.querySelector('input[name="autorizacion_mascota"]:checked').value;
+	const cantidad_gatos = document.getElementById("cant_gatos").value;
+	const cantidad_perros = document.getElementById("cant_perros").value;
+	const patente = document.getElementById("patente").value;
+	const marca = document.getElementById("marca").value;
 	const firma = signaturePad.toDataURL();
 
 	var xOffset = doc.internal.pageSize.width / 2;
@@ -54,10 +58,9 @@ form.addEventListener("submit", async (event) => {
 	doc.line(25, (yOffset += 10), 570, (yOffset));
 	doc.line(25, 98, 25, 828);
 	doc.line(570, 98, 570, 828);
-	doc.setFont(undefined, 'bold').text("DATOS DEL PROPIETARIO: ", 40, (yOffset += 20));
-	let textWidth = doc.getTextWidth("DATOS DEL PROPIETARIO: ");
+	doc.setFont(undefined, 'bold').text("DATOS DEL PROPIETARIO", 40, (yOffset += 20));
 	doc.setDrawColor(255, 0, 0);
-	doc.line(40, (yOffset += 5), 40 + textWidth, yOffset)
+	doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS DEL PROPIETARIO"), yOffset)
 	doc.text("Nombre:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(formatName(nombre_prop), (50 + doc.getTextWidth("Nombre:")), yOffset);
 	doc.setFont(undefined, 'bold').text("Rut:", 40, (yOffset += 20));
@@ -71,9 +74,9 @@ form.addEventListener("submit", async (event) => {
 	doc.setDrawColor(0, 0, 0);
 	doc.line(25, (yOffset += 10), 570, yOffset);
 	// CORREDORA
-	doc.setFont(undefined, 'bold').text("DATOS CORREDORA O ENCARGADO: ", 40, (yOffset += 20));
+	doc.setFont(undefined, 'bold').text("DATOS CORREDORA O ENCARGADO", 40, (yOffset += 20));
 	doc.setDrawColor(255, 0, 0);
-	doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS CORREDORA O ENCARGADO: "), yOffset)
+	doc.line(40, (yOffset += 5), 40 + doc.getTextWidth("DATOS CORREDORA O ENCARGADO"), yOffset)
 	doc.text("Nombre:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(formatName(nombre_corredora), (50 + doc.getTextWidth("Nombre:")), yOffset);
 	// RUT
@@ -121,11 +124,19 @@ form.addEventListener("submit", async (event) => {
 	doc.setFont(undefined, 'normal').text(residentes.length.toString(), (55 + doc.getTextWidth("Cantidad total de personas:")), yOffset);
 	doc.setFont(undefined, 'bold').text("Propietario autoriza mascota:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(aut_mascota, (55 + doc.getTextWidth("Propietario autoriza mascota:")), yOffset);
-
+	doc.setFont(undefined, 'bold').text("Gatos:", 230, yOffset);
+	doc.setFont(undefined, 'normal').text(cantidad_gatos, (235 + doc.getTextWidth("Gatos:")), yOffset);
+	doc.setFont(undefined, 'bold').text("Perros:", 285, yOffset);
+	doc.setFont(undefined, 'normal').text(cantidad_perros, (290 + doc.getTextWidth("Perros:")), yOffset);
+	doc.setFont(undefined, 'bold').text("Vehículo:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(marca.toUpperCase(), (50 + doc.getTextWidth("Vehículo:")), yOffset);
+	doc.setFont(undefined, 'bold').text("Patente:", 40, (yOffset += 20));
+	doc.line(25, (yOffset += 10), 570, yOffset);
 	doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
 	// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
 
 })
+
 
 btnAgregar.onclick = () => {
 	let html = document.getElementById(`residente_${aux}`)
@@ -135,12 +146,12 @@ btnAgregar.onclick = () => {
 	<h3 align="center">RESIDENTE ${aux}</h3>
 	<div class="form-group">
 	<label for="nombre_r${aux}">Nombre: </label>
-	<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}" required>
+	<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}" placeholder="Nombre residente ${aux}" required>
 	</div>
 	<div class="flex">
 	<div class="form-group">
 	<label for="rut_r${aux}">Rut: </label>
-	<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" required>
+	<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" placeholder="Rut residente ${aux}" required>
 	</div>
 	<div class="form-group">
 	<label for="tel_r${aux}">Teléfono: </label>
@@ -152,7 +163,7 @@ btnAgregar.onclick = () => {
 	<input type="text" class="form-control" name="trabajo_r1" id="trabajo_r${aux}">
 	</div>
 	</fieldset>`
-	if (aux < 7){
+	if (aux < 6){
 		html.insertAdjacentHTML('afterend', template);
 		return
 	}
