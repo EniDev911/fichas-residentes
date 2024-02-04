@@ -131,6 +131,7 @@ form.addEventListener("submit", async (event) => {
 	doc.setFont(undefined, 'bold').text("Vehículo:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(marca.toUpperCase(), (50 + doc.getTextWidth("Vehículo:")), yOffset);
 	doc.setFont(undefined, 'bold').text("Patente:", 40, (yOffset += 20));
+	doc.setFont(undefined, 'normal').text(patente.toUpperCase(), (50 + doc.getTextWidth("Patente:")), yOffset);
 	doc.line(25, (yOffset += 10), 570, yOffset);
 	doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
 	// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
@@ -219,7 +220,9 @@ function getDate(date) {
 		});
 		document.getElementById("box_mascotas").classList.remove("hidden")
 	}else if (event.target.id === "no") {
-		document.getElementById("box_mascotas").classList.add("hidden")
+		document.getElementById("box_mascotas").classList.add("hidden");
+		document.getElementById("cant_gatos").value = 0;
+		document.getElementById("cant_perros").value = 0;
 	}
 }
 
