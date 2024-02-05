@@ -110,11 +110,11 @@ form.addEventListener("submit", async (event) => {
 		 if (document.querySelector(`#tel_r${i}`) !== null) {
 		 	doc.setFont(undefined, 'normal').text(document.querySelector(`#tel_r${i}`).value, (210 + doc.getTextWidth("Télefono:")), yOffset);
 		 }
-			// MAIL
-			doc.setFont(undefined, 'bold').text("Correo:", 40, (yOffset += 20));
-			if (document.querySelector(`#mail_r${i}`) !== null) {
-				doc.setFont(undefined, 'normal').text(document.querySelector(`#mail_r${i}`).value, (50 + doc.getTextWidth("Correo")) , yOffset);
-			}
+		// LUGAR DE TRABAJO
+		doc.setFont(undefined, 'bold').text("Lugar de trabajo:", 40, (yOffset += 20));
+		if (document.querySelector(`#trabajo_r${i}`) !== null) {
+			doc.setFont(undefined, 'normal').text(document.querySelector(`#trabajo_r${i}`).value, (50 + doc.getTextWidth("Lugar de trabajo:")) , yOffset);
+		}
 		// LINE
 		doc.line(25, (yOffset += 10), 570, yOffset);
 	}
@@ -150,7 +150,7 @@ btnAgregar.onclick = () => {
 	</div>
 	<div class="flex">
 	<div class="form-group">
-	<label for="rut_r${aux}">Rut: </label>
+	<label for="rut_r${aux}">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
 	<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" placeholder="Rut residente ${aux}" required>
 	</div>
 	<div class="form-group">
@@ -160,7 +160,7 @@ btnAgregar.onclick = () => {
 	</div>
 	<div class="form-group">
 	<label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
-	<input type="text" class="form-control" name="trabajo_r1" id="trabajo_r${aux}">
+	<input type="text" class="form-control" name="trabajo_r${aux}" id="trabajo_r${aux}">
 	</div>
 	</fieldset>`
 	if (aux < 6){
