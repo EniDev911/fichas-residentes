@@ -113,7 +113,7 @@ form.addEventListener("submit", async (event) => {
 		// LUGAR DE TRABAJO
 		doc.setFont(undefined, 'bold').text("Lugar de trabajo:", 40, (yOffset += 20));
 		if (document.querySelector(`#trabajo_r${i}`) !== null) {
-			doc.setFont(undefined, 'normal').text(document.querySelector(`#trabajo_r${i}`).value, (50 + doc.getTextWidth("Lugar de trabajo:")) , yOffset);
+			doc.setFont(undefined, 'normal').text(document.querySelector(`#trabajo_r${i}`).value, (55 + doc.getTextWidth("Lugar de trabajo:")) , yOffset);
 		}
 		// LINE
 		doc.line(25, (yOffset += 10), 570, yOffset);
