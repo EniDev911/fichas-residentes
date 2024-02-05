@@ -135,7 +135,7 @@ form.addEventListener("submit", async (event) => {
 	doc.line(25, (yOffset += 10), 570, yOffset);
 	doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
 	// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
-
+	event.target.reset();
 })
 
 
