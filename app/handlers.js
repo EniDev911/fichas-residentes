@@ -133,17 +133,33 @@ form.addEventListener("submit", async (event) => {
 	doc.setFont(undefined, 'bold').text("Patente:", 40, (yOffset += 20));
 	doc.setFont(undefined, 'normal').text(patente.toUpperCase(), (50 + doc.getTextWidth("Patente:")), yOffset);
 	doc.line(25, (yOffset += 10), 570, yOffset);
-	doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
-	// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
-	event.target.reset();
+	if (signaturePad.isEmpty()) {
+		Swal.fire({
+			title: "Debe firmar antes de descargar el PDF",
+			animation: false
+		})
+	} else {
+		doc.output('save', new Date().toISOString().split('T')[0] + '_'+ dpto.value + '.pdf')
+		// doc.output('dataurlnewwindow', { filename: 'archivo.pdf'})
+		location.reload();
+	}
 })
 
 
 btnAgregar.onclick = () => {
-	let html = document.getElementById(`residente_${aux}`)
-	aux++;
+	if (aux < 5){
+		aux++;
+		agregarResidente();
+	} else {
+		alert("El límite son 5 residentes");
+	}
+}
+
+function agregarResidente(e) {
+	let html = document.getElementById(`residente_${aux-1}`);
 	let template = `
 	<fieldset id="residente_${aux}" class="residente">
+	<button type="button" class="btn btn-danger pull-right" id="close${aux}">&times;</button>
 	<h3 align="center">RESIDENTE ${aux}</h3>
 	<div class="form-group">
 	<label for="nombre_r${aux}">Nombre: </label>
@@ -152,7 +168,7 @@ btnAgregar.onclick = () => {
 	<div class="flex">
 	<div class="form-group">
 	<label for="rut_r${aux}">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
-	<input type="tel" class="form-control" name="rut_r1" id="rut_r${aux}" placeholder="Rut residente ${aux}" required>
+	<input type="tel" class="form-control" name="rut_r${aux}" id="rut_r${aux}" placeholder="Rut residente ${aux}" required>
 	</div>
 	<div class="form-group">
 	<label for="tel_r${aux}">Teléfono: </label>
@@ -164,12 +180,24 @@ btnAgregar.onclick = () => {
 	<input type="text" class="form-control" name="trabajo_r${aux}" id="trabajo_r${aux}">
 	</div>
 	</fieldset>`
-	if (aux < 6){
-		html.insertAdjacentHTML('afterend', template);
-		return
-	}
-	alert("El límite son 5 residentes");
+	html.insertAdjacentHTML('afterend', template);
 }
+
+function actualizarResidente() {
+	const residentes = document.querySelectorAll(".residente");
+	residentes.forEach((node, i) => {
+		node.id = "residente_" + (i + 1);
+		node.getElementsByTagName("h3")[0].textContent = "RESIDENTE " + (i + 1);
+		node.querySelector("h3")[0].textContent = "RESIDENTE " + (i + 1);
+	})
+}
+
+function removerResidente(e) {
+	e.target.parentElement.remove();
+	aux--;
+	actualizarResidente();
+}
+
 
 function addOneYear(date) {
 	date.setFullYear(date.getFullYear() + 1);
@@ -271,5 +299,5 @@ function on(eventName, selector, handler) {
 }
 
 on('input', 'input[id^="rut"]', handleOnInput);
-
+on('click', 'button[id^="close"]', removerResidente)
 

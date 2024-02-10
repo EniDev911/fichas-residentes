@@ -5,15 +5,15 @@ export let signaturePad = null;
 
 
 function initApplication() {
-    cargarDepartamentos();
-    const canvas = document.querySelector("canvas");
-    canvas.height = canvas.offsetHeight;
-    canvas.width = canvas.offsetWidth;
-    signaturePad = new SignaturePad(canvas, {});
+	cargarDepartamentos();
+	const canvas = document.querySelector("canvas");
+	canvas.height = canvas.offsetHeight;
+	canvas.width = canvas.offsetWidth;
+	signaturePad = new SignaturePad(canvas, {});
 }
 
 document.onreadystatechange = () => {
-    if (document.readyState === "complete") {
-        initApplication();
-    }
+	if (document.readyState === "complete") {
+		initApplication();
+	}
 };
