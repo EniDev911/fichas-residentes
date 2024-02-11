@@ -163,39 +163,54 @@ function agregarResidente(e) {
 	<h3 align="center">RESIDENTE ${aux}</h3>
 	<div class="form-group">
 	<label for="nombre_r${aux}">Nombre: </label>
-	<input type="text" class="form-control" name="nombre_r${aux}" id="nombre_r${aux}" placeholder="Nombre residente ${aux}" required>
+	<input type="text" class="form-control text-capitalize" name="nombre_r${aux}" id="nombre_r${aux}" placeholder="Nombre residente ${aux}" required>
 	</div>
 	<div class="flex">
 	<div class="form-group">
 	<label for="rut_r${aux}">Rut: <small>(Si termina en k, remplazar por 0)</small></label>
-	<input type="tel" class="form-control" name="rut_r${aux}" id="rut_r${aux}" placeholder="Rut residente ${aux}" required>
+	<input type="tel" class="form-control text-capitalize" name="rut_r${aux}" id="rut_r${aux}" placeholder="Rut residente ${aux}" required>
 	</div>
 	<div class="form-group">
 	<label for="tel_r${aux}">Teléfono: </label>
-	<input type="tel" class="form-control" name="tel_r1" id="tel_r${aux}">
+	<input type="tel" class="form-control" name="tel_r${aux}" id="tel_r${aux}">
 	</div>
 	</div>
 	<div class="form-group">
 	<label for="trabajo_r${aux}">Lugar de trabajo y/o Estudio</label>
-	<input type="text" class="form-control" name="trabajo_r${aux}" id="trabajo_r${aux}">
+	<input type="text" class="form-control text-capitalize" name="trabajo_r${aux}" id="trabajo_r${aux}">
 	</div>
 	</fieldset>`
 	html.insertAdjacentHTML('afterend', template);
 }
 
-function actualizarResidente() {
+function actualizarResidentes() {
 	const residentes = document.querySelectorAll(".residente");
 	residentes.forEach((node, i) => {
 		node.id = "residente_" + (i + 1);
 		node.getElementsByTagName("h3")[0].textContent = "RESIDENTE " + (i + 1);
-		node.querySelector("h3")[0].textContent = "RESIDENTE " + (i + 1);
+		// input name
+		node.querySelectorAll("input")[0].id="nombre_r" + (i + 1);
+		node.querySelectorAll("input")[0].name="nombre_r" + (i + 1);
+		node.querySelectorAll("input")[0].placeholder="Nombre residente " + (i + 1);
+		// input rut
+		node.querySelectorAll("input")[1].id="rut_r" + (i + 1);
+		node.querySelectorAll("input")[1].name="rut_r" + (i + 1);
+		node.querySelectorAll("input")[1].placeholder="Rut residente " + (i + 1);
+		// input phone
+		node.querySelectorAll("input")[2].id="tel_r" + (i + 1);
+		node.querySelectorAll("input")[2].name="tel_r" + (i + 1);
+		node.querySelectorAll("input")[2].placeholder="Teléfono residente " + (i + 1);
+		// input lugar de trabajo
+		node.querySelectorAll("input")[3].id="trabajo_r" + (i + 1);
+		node.querySelectorAll("input")[3].name="trabajo_r" + (i + 1);
+		node.querySelectorAll("input")[3].placeholder="Lugar de trabajo o estudio residente " + (i + 1);
 	})
 }
 
 function removerResidente(e) {
 	e.target.parentElement.remove();
 	aux--;
-	actualizarResidente();
+	actualizarResidentes();
 }
 
 
@@ -227,77 +242,75 @@ function getDate(date) {
 			document.getElementById("f_salida").value = getDate(date)
 		}
 		else if (event.target.id === "anio_corrido") {
-		// alert('Checked radio with ID = ' + event.target.id);
-		document.getElementById("f_ingreso").value = getDate(date);
-		document.getElementById("f_salida").value = getDate(addOneYear(date));
-	} else if (event.target.id === "mar_dic") {
-		document.getElementById("f_ingreso").value = getDate(new Date());
-		document.getElementById("f_salida").value = "31/12/"+date.getFullYear()
-	} else if (event.target.id === "si") {
-		Swal.fire({
-			title: "<h1></H1>IMPORTANTE</h1>",
-			icon: "info",
-			text: "Modal with a custom image.",
-			width: "90%",
-			html: `
-			<p style="font-size: 1.8em">Ademas deberá <b>enviar un correo a la <a href="mailto:comite.espaciouno@gmail.com">administración</a></b> y adjuntar la documentación de desparasitación y vacunación de las mascotas.</p>
-			`,
-			customClass: {
-				confirmButton: "btn btn-success btn-lg"
-			}
-		});
-		document.getElementById("box_mascotas").classList.remove("hidden")
-	}else if (event.target.id === "no") {
-		document.getElementById("box_mascotas").classList.add("hidden");
-		document.getElementById("cant_gatos").value = 0;
-		document.getElementById("cant_perros").value = 0;
-	}
-}
-
-document.querySelectorAll("input[type='radio']").forEach((input) => {
-	input.addEventListener('change', handleOnChangeRadio);
-});
-let activate = false;
-document.getElementById('btn_firmar').addEventListener('click', (e) => {
-	if (activate) {
-
-	} else {
-		document.getElementById("signature-canvas").style.visibility = 'visible';
-		document.querySelector(".signature").style.height = '200px';
-		const div = document.createElement('div');
-		div.textContent = 'Resetear firma'
-		div.classList.add("btn", "btn-primary")
-		div.style.marginBottom = '5px';
-		div.id = "resetear_firma";
-		div.onclick = function() {
-			signaturePad.clear();
-		}
-		document.getElementById('btn_firmar').insertAdjacentElement("afterend", div);
-		e.target.style.display = 'none'
-		activate = true;
-	}
-})
-
-
-function handleOnInput(e) {
-	let rutFormateado = darFormatoRUT(e.target.value);
-	e.target.value = rutFormateado;
-}
-
-function on(eventName, selector, handler) {
-	document.addEventListener(eventName, function(event) {
-		const elements = document.querySelectorAll(selector);
-		const path = event.composedPath();
-		path.forEach(function(node) {
-			elements.forEach(function(elem) {
-				if (node === elem) {
-					handler.call(elem, event);
+			document.getElementById("f_ingreso").value = getDate(date);
+			document.getElementById("f_salida").value = getDate(addOneYear(date));
+		} else if (event.target.id === "mar_dic") {
+			document.getElementById("f_ingreso").value = getDate(new Date());
+			document.getElementById("f_salida").value = "31/12/"+date.getFullYear()
+		} else if (event.target.id === "si") {
+			Swal.fire({
+				title: "<h1></H1>IMPORTANTE</h1>",
+				icon: "info",
+				width: "90%",
+				html: `
+				<p style="font-size: 1.8em">Ademas deberá <b>enviar un correo a la <a href="mailto:comite.espaciouno@gmail.com">administración</a></b> y adjuntar la documentación de desparasitación y vacunación de las mascotas.</p>
+				`,
+				customClass: {
+					confirmButton: "btn btn-success btn-lg"
 				}
 			});
-		});
-	}, true);
-}
+			document.getElementById("box_mascotas").classList.remove("hidden")
+		}else if (event.target.id === "no") {
+			document.getElementById("box_mascotas").classList.add("hidden");
+			document.getElementById("cant_gatos").value = 0;
+			document.getElementById("cant_perros").value = 0;
+		}
+	}
 
-on('input', 'input[id^="rut"]', handleOnInput);
-on('click', 'button[id^="close"]', removerResidente)
+	document.querySelectorAll("input[type='radio']").forEach((input) => {
+		input.addEventListener('change', handleOnChangeRadio);
+	});
+	let activate = false;
+	document.getElementById('btn_firmar').addEventListener('click', (e) => {
+		if (activate) {
+
+		} else {
+			document.getElementById("signature-canvas").style.visibility = 'visible';
+			document.querySelector(".signature").style.height = '200px';
+			const div = document.createElement('div');
+			div.textContent = 'Resetear firma'
+			div.classList.add("btn", "btn-primary")
+			div.style.marginBottom = '5px';
+			div.id = "resetear_firma";
+			div.onclick = function() {
+				signaturePad.clear();
+			}
+			document.getElementById('btn_firmar').insertAdjacentElement("afterend", div);
+			e.target.style.display = 'none'
+			activate = true;
+		}
+	})
+
+
+	function handleOnInput(e) {
+		let rutFormateado = darFormatoRUT(e.target.value);
+		e.target.value = rutFormateado;
+	}
+
+	function on(eventName, selector, handler) {
+		document.addEventListener(eventName, function(event) {
+			const elements = document.querySelectorAll(selector);
+			const path = event.composedPath();
+			path.forEach(function(node) {
+				elements.forEach(function(elem) {
+					if (node === elem) {
+						handler.call(elem, event);
+					}
+				});
+			});
+		}, true);
+	}
+
+	on('input', 'input[id^="rut"]', handleOnInput);
+	on('click', 'button[id^="close"]', removerResidente)
 
